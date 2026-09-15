@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+:root {
+  --zolven-bg: #09090b;
+  --zolven-text: #ffffff;
+  --zolven-muted: #a1a1aa;
+  --zolven-jobs: #7c3aed;
+  --zolven-hire: #059669;
+  --zolven-opex: #2563eb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--zolven-bg);
+  color: var(--zolven-text);
+}
+
+::selection {
+  background: var(--zolven-opex);
+  color: white;
+}
