@@ -79,8 +79,8 @@ export function ZolvenLanding() {
     <main className="min-h-screen overflow-hidden bg-[#09090B] text-white">
       <Hero />
       <section className="grid grid-cols-1 lg:grid-cols-3">
-        {products.map((product) => (
-          <ProductCard key={product.key} {...product} />
+        {products.map(({ key, ...product }) => (
+          <ProductCard key={key} {...product} />
         ))}
       </section>
       <EcosystemBar />
