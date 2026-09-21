@@ -70,16 +70,16 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
             </div>
           </div>
 
-          <Link href="/#solutions" className="transition-opacity hover:opacity-60">
+          <Link href="/soluciones" className="transition-opacity hover:opacity-60">
             Soluciones
           </Link>
-          <Link href="/#industries" className="transition-opacity hover:opacity-60">
+          <Link href="/industrias" className="transition-opacity hover:opacity-60">
             Industrias
           </Link>
-          <Link href="/#resources" className="transition-opacity hover:opacity-60">
+          <Link href="/recursos" className="transition-opacity hover:opacity-60">
             Recursos
           </Link>
-          <Link href="/#pricing" className="transition-opacity hover:opacity-60">
+          <Link href="/precios" className="transition-opacity hover:opacity-60">
             Precios
           </Link>
         </nav>
