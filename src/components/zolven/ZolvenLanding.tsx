@@ -1,10 +1,11 @@
 "use client";
 
+import Link from "next/link";
+import { SiteHeader } from "@/components/zolven/SiteHeader";
 import {
   ArrowRight,
   BarChart3,
   BriefcaseBusiness,
-  ChevronDown,
   Contact,
   FolderKanban,
   Play,
@@ -19,6 +20,7 @@ const products = [
   {
     key: "jobs",
     brand: "Jobs",
+    href: "/productos/jobs",
     label: "OPORTUNIDADES SIN LÍMITES",
     title: "El talento que impulsa tu futuro.",
     description:
@@ -34,6 +36,7 @@ const products = [
   {
     key: "hire",
     brand: "Hire",
+    href: "/productos/hire",
     label: "GRANDES EQUIPOS EMPIEZAN AQUÍ",
     title: "Encuentra, evalúa, contrata.",
     description:
@@ -49,6 +52,7 @@ const products = [
   {
     key: "opex",
     brand: "Opex",
+    href: "/productos/opex",
     label: "OPERACIONES QUE IMPULSAN RESULTADOS",
     title: "Gestiona personas. Opera con claridad.",
     description:
@@ -78,7 +82,7 @@ export function ZolvenLanding() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#09090B] text-white">
       <Hero />
-      <section className="grid grid-cols-1 lg:grid-cols-3">
+      <section id="products" className="grid grid-cols-1 lg:grid-cols-3">
         {products.map(({ key, ...product }) => (
           <ProductCard key={key} {...product} />
         ))}
@@ -89,56 +93,18 @@ export function ZolvenLanding() {
   );
 }
 
-function Header() {
-  return (
-    <header className="relative z-30 text-[#09090B]">
-      <div className="mx-auto flex h-[76px] max-w-[1536px] items-center px-7 lg:px-14">
-        <a href="#" className="text-[40px] font-black tracking-[-0.065em] leading-none">
-          ZOLVEN
-        </a>
-
-        <nav className="ml-14 hidden items-center gap-9 text-[13px] font-medium lg:flex">
-          {["Productos", "Soluciones", "Industrias", "Recursos", "Precios"].map((item) => (
-            <a key={item} href="#" className="transition-opacity hover:opacity-50">
-              {item}
-            </a>
-          ))}
-        </nav>
-
-        <div className="ml-auto hidden items-center gap-6 text-white lg:flex">
-          <Search size={18} strokeWidth={1.7} />
-          <button className="flex items-center gap-1 text-[13px]">
-            ES <ChevronDown size={13} />
-          </button>
-          <a href="#" className="text-[13px]">
-            Iniciar sesión
-          </a>
-          <button className="flex h-10 items-center gap-2 rounded-full border border-white/20 bg-black/45 px-5 text-[12px] text-white backdrop-blur-sm">
-            Solicitar demo <ArrowRight size={14} />
-          </button>
-        </div>
-
-        <div className="ml-9 hidden pl-8 xl:block">
-          <p className="text-[9px] uppercase leading-[1.8] tracking-[0.36em] text-zinc-600">
-            Business<br />Technology<br />For A Brighter<br />Tomorrow
-          </p>
-        </div>
-      </div>
-    </header>
-  );
-}
-
 function Hero() {
   return (
     <section className="relative min-h-[313px] overflow-hidden bg-[#F7F8FA] text-[#09090B]">
       <div className="absolute inset-y-0 left-[39%] right-[10%] hidden overflow-hidden bg-[#0A0B0E] lg:block [clip-path:polygon(19%_0,100%_0,80%_100%,0_100%)]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_25%,rgba(59,130,246,0.10),transparent_42%)]" />
-        <div className="absolute inset-0 grid place-items-center text-[10px] uppercase tracking-[0.30em] text-white/20">
-          /images/hero/hero-woman.webp
+        <div className="absolute inset-0">
+          <div className="absolute left-[44%] top-[18%] h-[210px] w-[210px] rounded-full bg-blue-500/[0.05] blur-3xl" />
+          <div className="absolute bottom-[-38%] left-[42%] h-[300px] w-[230px] rounded-[48%_48%_18%_18%] bg-white/[0.025] blur-xl" />
         </div>
       </div>
 
-      <Header />
+      <SiteHeader />
 
       <div className="relative z-20 mx-auto h-[237px] max-w-[1536px] px-7 lg:px-14">
         <div className="max-w-[660px] pt-4">
@@ -178,6 +144,7 @@ function Hero() {
 }
 
 function ProductCard({
+  href,
   brand,
   label,
   title,
@@ -189,6 +156,7 @@ function ProductCard({
   border,
   accent,
 }: {
+  href: string;
   brand: string;
   label: string;
   title: string;
@@ -206,22 +174,22 @@ function ProductCard({
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className={`size-8 rounded-xl ${accent} shadow-lg`} />
-            <div className="text-[25px] font-semibold tracking-[-0.04em]"><span className="font-bold">ZOLVEN</span> <span className="font-light">{brand}</span></div>
+            <Link href={href} className="text-[25px] font-semibold tracking-[-0.04em] transition-opacity hover:opacity-80"><span className="font-bold">ZOLVEN</span> <span className="font-light">{brand}</span></Link>
           </div>
           <div className="max-w-[155px] text-right text-[8px] uppercase leading-[1.65] tracking-[0.32em] text-white/80">{label}</div>
         </div>
 
-        <h2 className="mt-7 max-w-[330px] text-[29px] font-medium leading-[0.98] tracking-[-0.04em]">{title}</h2>
+        <Link href={href} className="mt-7 block max-w-[330px] text-[29px] font-medium leading-[0.98] tracking-[-0.04em] transition-opacity hover:opacity-80">{title}</Link>
         <p className="mt-3 max-w-[320px] text-[13px] leading-[1.4] text-white/75">{description}</p>
 
         <div className="mt-4 flex gap-3">
-          <button className={`flex h-9 items-center gap-5 rounded-full px-5 text-[11px] font-medium ${accent}`}>{primary}<ArrowRight size={13} /></button>
-          <button className="h-9 rounded-full border border-white/45 px-5 text-[11px]">{secondary}</button>
+          <Link href={href} className={`flex h-9 items-center gap-5 rounded-full px-5 text-[11px] font-medium ${accent}`}>{primary}<ArrowRight size={13} /></Link>
+          <Link href={`${href}#tour`} className="flex h-9 items-center rounded-full border border-white/45 px-5 text-[11px]">{secondary}</Link>
         </div>
       </div>
 
       <div className="absolute right-[-5px] top-[64px] z-10 h-[200px] w-[48%]">
-        <div className="absolute inset-0 grid place-items-center text-[7px] uppercase tracking-[0.24em] text-white/10">{brand.toLowerCase()}-person.webp</div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_25%,rgba(255,255,255,.035),transparent_45%)]" />
         <span className="absolute bottom-2 right-4 rotate-[-7deg] max-w-[120px] text-right text-[10px] italic leading-tight text-white/90">{note}</span>
       </div>
 
