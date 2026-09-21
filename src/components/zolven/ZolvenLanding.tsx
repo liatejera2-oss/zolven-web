@@ -22,6 +22,7 @@ const products = [
     key: "jobs",
     brand: "Jobs",
     href: "/productos/jobs",
+    imageSrc: null,
     label: "OPORTUNIDADES SIN LÍMITES",
     title: "El talento que impulsa tu futuro.",
     description:
@@ -38,6 +39,7 @@ const products = [
     key: "hire",
     brand: "Hire",
     href: "/productos/hire",
+    imageSrc: "https://images.pexels.com/photos/4895434/pexels-photo-4895434.jpeg?auto=compress&cs=tinysrgb&w=1200",
     label: "GRANDES EQUIPOS EMPIEZAN AQUÍ",
     title: "Encuentra, evalúa, contrata.",
     description:
@@ -54,6 +56,7 @@ const products = [
     key: "opex",
     brand: "Opex",
     href: "/productos/opex",
+    imageSrc: null,
     label: "OPERACIONES QUE IMPULSAN RESULTADOS",
     title: "Gestiona personas. Opera con claridad.",
     description:
@@ -151,6 +154,7 @@ function Hero() {
 
 function ProductCard({
   href,
+  imageSrc,
   brand,
   label,
   title,
@@ -163,6 +167,7 @@ function ProductCard({
   accent,
 }: {
   href: string;
+  imageSrc: string | null;
   brand: string;
   label: string;
   title: string;
@@ -194,8 +199,20 @@ function ProductCard({
         </div>
       </div>
 
-      <div className="absolute right-[-5px] top-[64px] z-10 hidden h-[200px] w-[48%] sm:block">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_25%,rgba(255,255,255,.035),transparent_45%)]" />
+      <div className="absolute right-[-5px] top-[64px] z-10 hidden h-[200px] w-[48%] overflow-hidden sm:block">
+        {imageSrc ? (
+          <>
+            <img
+              src={imageSrc}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover object-[62%_42%] opacity-70"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,.02)_0%,rgba(0,0,0,.12)_30%,rgba(0,40,31,.44)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_35%,rgba(16,185,129,.10),transparent_58%)]" />
+          </>
+        ) : (
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_25%,rgba(255,255,255,.035),transparent_45%)]" />
+        )}
         <span className="absolute bottom-2 right-4 rotate-[-7deg] max-w-[120px] text-right text-[10px] italic leading-tight text-white/90">{note}</span>
       </div>
 
