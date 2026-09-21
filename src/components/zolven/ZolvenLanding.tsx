@@ -91,28 +91,34 @@ export function ZolvenLanding() {
 
 function Header() {
   return (
-    <header className="relative z-30 bg-[#F7F8FA] text-[#09090B]">
-      <div className="mx-auto flex h-[86px] max-w-[1536px] items-center px-7 lg:px-14">
-        <a href="#" className="text-[42px] font-black tracking-[-0.065em]">
+    <header className="relative z-30 text-[#09090B]">
+      <div className="mx-auto flex h-[76px] max-w-[1536px] items-center px-7 lg:px-14">
+        <a href="#" className="text-[40px] font-black tracking-[-0.065em] leading-none">
           ZOLVEN
         </a>
 
-        <nav className="ml-14 hidden items-center gap-10 text-[13px] font-medium lg:flex">
-          {['Productos','Soluciones','Industrias','Recursos','Precios'].map((item) => (
-            <a key={item} href="#" className="transition-opacity hover:opacity-50">{item}</a>
+        <nav className="ml-14 hidden items-center gap-9 text-[13px] font-medium lg:flex">
+          {["Productos", "Soluciones", "Industrias", "Recursos", "Precios"].map((item) => (
+            <a key={item} href="#" className="transition-opacity hover:opacity-50">
+              {item}
+            </a>
           ))}
         </nav>
 
-        <div className="ml-auto hidden items-center gap-7 lg:flex">
+        <div className="ml-auto hidden items-center gap-6 text-white lg:flex">
           <Search size={18} strokeWidth={1.7} />
-          <button className="flex items-center gap-1 text-[13px]">ES <ChevronDown size={13} /></button>
-          <a href="#" className="text-[13px]">Iniciar sesión</a>
-          <button className="flex h-10 items-center gap-5 rounded-full bg-[#09090B] px-5 text-[12px] text-white">
+          <button className="flex items-center gap-1 text-[13px]">
+            ES <ChevronDown size={13} />
+          </button>
+          <a href="#" className="text-[13px]">
+            Iniciar sesión
+          </a>
+          <button className="flex h-10 items-center gap-2 rounded-full border border-white/20 bg-black/45 px-5 text-[12px] text-white backdrop-blur-sm">
             Solicitar demo <ArrowRight size={14} />
           </button>
         </div>
 
-        <div className="ml-9 hidden border-l border-zinc-300 pl-8 xl:block">
+        <div className="ml-9 hidden pl-8 xl:block">
           <p className="text-[9px] uppercase leading-[1.8] tracking-[0.36em] text-zinc-600">
             Business<br />Technology<br />For A Brighter<br />Tomorrow
           </p>
@@ -124,39 +130,47 @@ function Header() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[#F7F8FA] text-[#09090B]">
+    <section className="relative min-h-[313px] overflow-hidden bg-[#F7F8FA] text-[#09090B]">
+      <div className="absolute inset-y-0 left-[39%] right-[10%] hidden overflow-hidden bg-[#0A0B0E] lg:block [clip-path:polygon(19%_0,100%_0,80%_100%,0_100%)]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_25%,rgba(59,130,246,0.10),transparent_42%)]" />
+        <div className="absolute inset-0 grid place-items-center text-[10px] uppercase tracking-[0.30em] text-white/20">
+          /images/hero/hero-woman.webp
+        </div>
+      </div>
+
       <Header />
-      <div className="relative min-h-[310px]">
-        <div className="relative z-20 mx-auto grid max-w-[1536px] grid-cols-1 lg:grid-cols-12">
-          <div className="px-7 pb-10 pt-6 lg:col-span-5 lg:px-14 lg:pb-14">
-            <h1 className="max-w-[610px] text-[42px] font-semibold leading-[0.98] tracking-[-0.045em] lg:text-[48px]">
-              Personas, operaciones<br />y crecimiento conectados.
-            </h1>
-            <p className="mt-3 max-w-[470px] text-[18px] leading-[1.35] text-zinc-600">
-              Tecnología para empresas que quieren operar mejor hoy y construir lo que viene.
-            </p>
-            <div className="mt-5 flex flex-wrap gap-3">
-              <button className="flex h-11 items-center gap-8 rounded-full bg-[#09090B] px-7 text-sm font-medium text-white">
-                Conoce Zolven <ArrowRight size={16} />
-              </button>
-              <button className="flex h-11 items-center gap-3 rounded-full border border-zinc-300 px-6 text-sm font-medium">
-                Ver video <span className="grid size-6 place-items-center rounded-full border border-zinc-500"><Play size={11} fill="currentColor" /></span>
-              </button>
-            </div>
+
+      <div className="relative z-20 mx-auto h-[237px] max-w-[1536px] px-7 lg:px-14">
+        <div className="max-w-[660px] pt-4">
+          <h1 className="max-w-[640px] text-[42px] font-semibold leading-[0.98] tracking-[-0.045em] lg:text-[45px]">
+            Personas, operaciones<br />y crecimiento conectados.
+          </h1>
+
+          <p className="mt-2 max-w-[470px] text-[18px] leading-[1.35] text-zinc-600">
+            Tecnología para empresas que quieren operar mejor hoy y construir lo que viene.
+          </p>
+
+          <div className="mt-3 flex flex-wrap gap-3">
+            <button className="flex h-10 items-center gap-2 rounded-full bg-[#09090B] px-5 text-sm font-medium text-white">
+              Conoce Zolven <ArrowRight size={16} />
+            </button>
+            <button className="flex h-10 items-center gap-3 rounded-full border border-zinc-300 px-5 text-sm font-medium text-zinc-700">
+              Ver video
+              <span className="grid size-6 place-items-center rounded-full border border-zinc-300">
+                <Play size={11} fill="currentColor" />
+              </span>
+            </button>
           </div>
         </div>
 
-        <div className="absolute inset-y-0 left-[39%] right-[10%] hidden overflow-hidden bg-[#0A0B0E] lg:block [clip-path:polygon(19%_0,100%_0,80%_100%,0_100%)]">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_25%,rgba(59,130,246,0.10),transparent_42%)]" />
-          <div className="absolute inset-0 grid place-items-center text-[11px] uppercase tracking-[0.30em] text-white/20">
-            hero-woman.webp
+        <div className="absolute right-10 top-[98px] hidden items-center gap-8 lg:flex">
+          <div className="text-[11px] uppercase leading-5 tracking-[0.32em] text-zinc-600">
+            Simplify<br />Connect<br />Empower
           </div>
-        </div>
-
-        <div className="absolute right-10 top-[105px] z-30 hidden items-center gap-8 lg:flex">
-          <div className="text-[11px] uppercase leading-5 tracking-[0.32em] text-zinc-600">Simplify<br />Connect<br />Empower</div>
           <div className="h-14 w-px bg-zinc-300" />
-          <div className="text-[11px] uppercase leading-5 tracking-[0.32em] text-zinc-600">A More<br />Human<br />Business</div>
+          <div className="text-[11px] uppercase leading-5 tracking-[0.32em] text-zinc-600">
+            A More<br />Human<br />Business
+          </div>
         </div>
       </div>
     </section>
