@@ -266,26 +266,26 @@ export function ProductExperience({ product }: { product: ProductKey }) {
 
       <section className="relative overflow-hidden border-b border-white/[0.06]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_25%,rgba(53,92,255,.16),transparent_35%)]" />
-        <div className="relative mx-auto grid max-w-[1536px] gap-12 px-7 py-20 lg:grid-cols-[.88fr_1.12fr] lg:px-14 lg:py-24">
+        <div className="relative mx-auto grid max-w-[1536px] gap-10 px-5 py-14 sm:px-7 sm:py-20 lg:grid-cols-[.88fr_1.12fr] lg:gap-12 lg:px-14 lg:py-24">
           <div>
             <Link href="/#products" className="inline-flex items-center gap-2 text-[12px] text-zinc-500 transition-colors hover:text-white">
               <ArrowLeft size={14} /> Volver a productos
             </Link>
 
-            <div className="mt-12 flex items-center gap-3">
+            <div className="mt-9 flex items-center gap-3 sm:mt-12">
               <div className={`grid size-11 place-items-center rounded-2xl ${config.accent}`}>
                 <ProductIcon size={20} />
               </div>
               <div>
-                <p className="text-[28px] font-semibold tracking-[-0.045em]">{config.brand}</p>
-                <p className="text-[11px] uppercase tracking-[0.22em] text-zinc-500">{config.descriptor}</p>
+                <p className="text-[24px] font-semibold tracking-[-0.045em] sm:text-[28px]">{config.brand}</p>
+                <p className="text-[9px] uppercase tracking-[0.18em] text-zinc-500 sm:text-[11px] sm:tracking-[0.22em]">{config.descriptor}</p>
               </div>
             </div>
 
-            <h1 className="mt-9 max-w-[590px] text-[52px] font-semibold leading-[.98] tracking-[-0.055em] lg:text-[64px]">
+            <h1 className="mt-7 max-w-[590px] text-[42px] font-semibold leading-[.98] tracking-[-0.055em] sm:mt-9 sm:text-[52px] lg:text-[64px]">
               {config.claim}
             </h1>
-            <p className="mt-5 max-w-[560px] text-[18px] leading-[1.55] text-zinc-400">
+            <p className="mt-5 max-w-[560px] text-[16px] leading-[1.55] text-zinc-400 sm:text-[18px]">
               {config.intro}
             </p>
 
@@ -309,14 +309,14 @@ export function ProductExperience({ product }: { product: ProductKey }) {
               </div>
             </div>
 
-            <div className="grid min-h-[365px] grid-cols-[126px_1fr]">
-              <aside className="border-r border-white/[0.06] p-3">
-                <p className="px-2 text-[7px] uppercase tracking-[0.22em] text-zinc-600">Workspace</p>
+            <div className="min-h-[365px] md:grid md:grid-cols-[126px_1fr]">
+              <aside className="flex gap-1 overflow-x-auto border-b border-white/[0.06] p-3 md:block md:border-b-0 md:border-r">
+                <p className="hidden px-2 text-[7px] uppercase tracking-[0.22em] text-zinc-600 md:block">Workspace</p>
                 {config.tabs.map((tab, index) => (
                   <button
                     key={tab.label}
                     onClick={() => setActive(index)}
-                    className={`mt-1.5 block w-full rounded-lg px-2 py-2 text-left text-[8px] transition-colors ${
+                    className={`block whitespace-nowrap rounded-lg px-2.5 py-2 text-left text-[8px] transition-colors md:mt-1.5 md:w-full ${
                       active === index ? `${config.accentSoft} ${config.accentText}` : "text-zinc-500 hover:bg-white/[0.03]"
                     }`}
                   >
@@ -325,7 +325,7 @@ export function ProductExperience({ product }: { product: ProductKey }) {
                 ))}
               </aside>
 
-              <div className="p-5">
+              <div className="p-4 sm:p-5">
                 <div className="flex items-start justify-between gap-5">
                   <div>
                     <p className={`text-[7px] uppercase tracking-[0.22em] ${config.accentText}`}>{current.eyebrow}</p>
@@ -339,7 +339,7 @@ export function ProductExperience({ product }: { product: ProductKey }) {
                   </span>
                 </div>
 
-                <div className="mt-5 grid grid-cols-3 gap-2">
+                <div className="mt-5 grid grid-cols-1 gap-2 sm:grid-cols-3">
                   {current.metrics.map(([value, label]) => (
                     <div key={label} className="rounded-xl border border-white/[0.055] bg-white/[0.025] p-3">
                       <strong className="text-[18px] font-medium">{value}</strong>
@@ -348,7 +348,7 @@ export function ProductExperience({ product }: { product: ProductKey }) {
                   ))}
                 </div>
 
-                <div className="mt-3 grid grid-cols-[1.15fr_.85fr] gap-3">
+                <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-[1.15fr_.85fr]">
                   <div className="rounded-xl border border-white/[0.055] bg-white/[0.018] p-3">
                     <div className="flex items-center justify-between">
                       <p className="text-[8px] font-medium text-zinc-300">Actividad operativa</p>
@@ -387,10 +387,10 @@ export function ProductExperience({ product }: { product: ProductKey }) {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1536px] px-7 py-20 lg:px-14">
+      <section className="mx-auto max-w-[1536px] px-5 py-14 sm:px-7 sm:py-20 lg:px-14">
         <div className="max-w-[620px]">
           <p className={`text-[10px] uppercase tracking-[0.28em] ${config.accentText}`}>PRODUCTO</p>
-          <h2 className="mt-3 text-[38px] font-medium tracking-[-0.045em]">Explora la plataforma por capacidad.</h2>
+          <h2 className="mt-3 text-[32px] font-medium tracking-[-0.045em] sm:text-[38px]">Explora la plataforma por capacidad.</h2>
           <p className="mt-3 text-[15px] leading-[1.6] text-zinc-500">
             Selecciona una pestaña para cambiar el contenido del producto. Esta navegación ya es interactiva y servirá como base para las funcionalidades reales.
           </p>
