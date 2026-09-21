@@ -40,7 +40,7 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
         </Link>
 
         <nav className="ml-14 hidden items-center gap-9 text-[13px] font-medium lg:flex">
-          <div className="group relative">
+          <div className="group relative flex h-[76px] items-center">
             <Link
               href="/#products"
               className="flex items-center gap-1.5 transition-opacity hover:opacity-60"
@@ -48,23 +48,25 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
               Productos <ChevronDown size={12} />
             </Link>
 
-            <div className="pointer-events-none absolute left-[-18px] top-[28px] w-[310px] translate-y-1 rounded-2xl border border-black/10 bg-white p-2 opacity-0 shadow-[0_24px_70px_rgba(0,0,0,.18)] transition-all duration-150 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100">
-              {products.map((product) => (
-                <Link
-                  key={product.name}
-                  href={product.href}
-                  className="flex items-center rounded-xl px-3 py-3 text-[#0B0D12] transition-colors hover:bg-zinc-100"
-                >
-                  <span className={`mr-3 size-3 rounded-md ${product.dot}`} />
-                  <span>
-                    <span className="block text-[12px] font-semibold">{product.name}</span>
-                    <span className="mt-0.5 block text-[10px] font-normal text-zinc-500">
-                      {product.description}
+            <div className="pointer-events-none absolute left-[-18px] top-[58px] w-[310px] pt-[18px] opacity-0 transition-opacity duration-150 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+              <div className="rounded-2xl border border-black/10 bg-white p-2 shadow-[0_24px_70px_rgba(0,0,0,.18)]">
+                {products.map((product) => (
+                  <Link
+                    key={product.name}
+                    href={product.href}
+                    className="flex items-center rounded-xl px-3 py-3 text-[#0B0D12] transition-colors hover:bg-zinc-100 focus:bg-zinc-100 focus:outline-none"
+                  >
+                    <span className={`mr-3 size-3 rounded-md ${product.dot}`} />
+                    <span>
+                      <span className="block text-[12px] font-semibold">{product.name}</span>
+                      <span className="mt-0.5 block text-[10px] font-normal text-zinc-500">
+                        {product.description}
+                      </span>
                     </span>
-                  </span>
-                  <ArrowRight size={13} className="ml-auto text-zinc-400" />
-                </Link>
-              ))}
+                    <ArrowRight size={13} className="ml-auto text-zinc-400" />
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
 
