@@ -1,5 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, ChevronDown, Search } from "lucide-react";
+import { ArrowRight, ChevronDown, Menu, Search, X } from "lucide-react";
 
 const products = [
   {
@@ -29,13 +32,20 @@ const products = [
 ];
 
 export function SiteHeader({ dark = false }: { dark?: boolean }) {
+  const [mobileOpen, setMobileOpen] = useState(false);
   const baseText = dark ? "text-white" : "text-[#09090B]";
   const subtle = dark ? "text-zinc-400" : "text-zinc-600";
+  const mobilePanel = dark
+    ? "border-white/[0.08] bg-[#0B0D11] text-white"
+    : "border-black/10 bg-white text-[#09090B]";
 
   return (
     <header className={`relative z-40 ${baseText}`}>
-      <div className="mx-auto flex h-[76px] max-w-[1536px] items-center px-7 lg:px-14">
-        <Link href="/" className="text-[40px] font-black leading-none tracking-[-0.065em]">
+      <div className="mx-auto flex h-[76px] max-w-[1536px] items-center px-5 sm:px-7 lg:px-14">
+        <Link
+          href="/"
+          className="text-[34px] font-black leading-none tracking-[-0.065em] sm:text-[40px]"
+        >
           ZOLVEN
         </Link>
 
@@ -81,7 +91,7 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
           </Link>
         </nav>
 
-        <div className={`ml-auto hidden items-center gap-6 lg:flex ${dark ? "text-white" : "text-white"}`}>
+        <div className="ml-auto hidden items-center gap-6 text-white lg:flex">
           <button aria-label="Buscar">
             <Search size={18} strokeWidth={1.7} />
           </button>
@@ -103,6 +113,81 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
           <p className={`text-[9px] uppercase leading-[1.8] tracking-[0.36em] ${subtle}`}>
             Business<br />Technology<br />For A Brighter<br />Tomorrow
           </p>
+        </div>
+
+        <button
+          type="button"
+          aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={mobileOpen}
+          onClick={() => setMobileOpen((open) => !open)}
+          className={`ml-auto grid size-10 place-items-center rounded-full border lg:hidden ${
+            dark
+              ? "border-white/15 bg-white/[0.04] text-white"
+              : "border-black/10 bg-white/80 text-black"
+          }`}
+        >
+          {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+        </button>
+      </div>
+
+      <div
+        className={`absolute left-3 right-3 top-[68px] overflow-hidden rounded-2xl border shadow-[0_24px_70px_rgba(0,0,0,.20)] transition-all duration-200 lg:hidden ${mobilePanel} ${
+          mobileOpen
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-2 opacity-0"
+        }`}
+      >
+        <div className="p-3">
+          <p className={`px-3 pb-2 pt-1 text-[9px] uppercase tracking-[0.22em] ${subtle}`}>
+            Productos
+          </p>
+          {products.map((product) => (
+            <Link
+              key={product.name}
+              href={product.href}
+              onClick={() => setMobileOpen(false)}
+              className={`flex items-center rounded-xl px-3 py-3 transition-colors ${
+                dark ? "hover:bg-white/[0.05]" : "hover:bg-zinc-100"
+              }`}
+            >
+              <span className={`mr-3 size-3 rounded-md ${product.dot}`} />
+              <span>
+                <span className="block text-[12px] font-semibold">{product.name}</span>
+                <span className={`mt-0.5 block text-[9px] font-normal ${subtle}`}>
+                  {product.description}
+                </span>
+              </span>
+              <ArrowRight size={13} className="ml-auto opacity-40" />
+            </Link>
+          ))}
+
+          <div className={`my-2 h-px ${dark ? "bg-white/[0.07]" : "bg-black/[0.07]"}`} />
+
+          {[
+            ["Soluciones", "/soluciones"],
+            ["Industrias", "/industrias"],
+            ["Precios", "/precios"],
+          ].map(([label, href]) => (
+            <Link
+              key={label}
+              href={href}
+              onClick={() => setMobileOpen(false)}
+              className={`flex items-center justify-between rounded-xl px-3 py-3 text-[12px] font-medium ${
+                dark ? "hover:bg-white/[0.05]" : "hover:bg-zinc-100"
+              }`}
+            >
+              {label}
+              <ArrowRight size={13} className="opacity-40" />
+            </Link>
+          ))}
+
+          <Link
+            href="/solicitar-demo"
+            onClick={() => setMobileOpen(false)}
+            className="mt-2 flex h-11 items-center justify-center gap-3 rounded-full bg-[#09090B] text-[12px] font-medium text-white"
+          >
+            Solicitar demo <ArrowRight size={14} />
+          </Link>
         </div>
       </div>
     </header>
