@@ -220,9 +220,9 @@ function ProductCard({
         </div>
       </div>
 
-      <div className="absolute right-[-5px] top-[58px] z-10 h-[290px] w-[48%]">
+      <div className="absolute right-[-5px] top-[64px] z-10 h-[200px] w-[48%]">
         <div className="absolute inset-0 grid place-items-center text-[7px] uppercase tracking-[0.24em] text-white/10">{brand.toLowerCase()}-person.webp</div>
-        <span className="absolute bottom-8 right-4 rotate-[-8deg] max-w-[120px] text-right text-[11px] italic leading-tight">{note}</span>
+        <span className="absolute bottom-2 right-4 rotate-[-7deg] max-w-[120px] text-right text-[10px] italic leading-tight text-white/90">{note}</span>
       </div>
 
       <DashboardPreview brand={brand} />
@@ -239,7 +239,7 @@ function DashboardPreview({ brand }: { brand: string }) {
     ];
 
     return (
-      <div className="absolute bottom-0 left-3 right-3 z-30 overflow-hidden rounded-t-[18px] border border-violet-300/20 bg-[#0A0B10]/95 shadow-2xl backdrop-blur-xl">
+      <div className="absolute bottom-0 left-3 right-3 z-30 h-[290px] overflow-hidden rounded-t-[18px] border border-violet-300/20 bg-[#0A0B10]/95 shadow-2xl backdrop-blur-xl">
         <div className="flex h-10 items-center border-b border-white/[0.06] px-4">
           <div className="flex items-center gap-2 text-[10px] font-semibold">
             <div className="size-4 rounded-md bg-violet-600" />
@@ -252,7 +252,7 @@ function DashboardPreview({ brand }: { brand: string }) {
           </div>
         </div>
 
-        <div className="grid min-h-[214px] grid-cols-[92px_1fr]">
+        <div className="grid h-[250px] grid-cols-[92px_1fr]">
           <aside className="border-r border-white/[0.06] p-2 text-[7px] text-zinc-500">
             <div className="mb-1 rounded-md bg-violet-500/15 px-2 py-1.5 text-violet-300">
               Para ti
@@ -323,7 +323,7 @@ function DashboardPreview({ brand }: { brand: string }) {
   }
 
   if (brand === "Hire") {
-    const stages = [
+    const funnel = [
       ["48", "Candidatos"],
       ["12", "Screening"],
       ["6", "Entrevistas"],
@@ -331,14 +331,26 @@ function DashboardPreview({ brand }: { brand: string }) {
       ["1", "Oferta"],
     ];
 
-    const candidates = [
-      ["AL", "Ana López", "Screening", "92%"],
-      ["CM", "Carlos Méndez", "Entrevista", "88%"],
-      ["LS", "Laura Santos", "Finalista", "95%"],
+    const columns = [
+      {
+        title: "Screening",
+        count: "12",
+        candidate: ["AL", "Ana López", "92%", "Portfolio revisado"],
+      },
+      {
+        title: "Entrevistas",
+        count: "6",
+        candidate: ["CM", "Carlos Méndez", "88%", "Entrevista técnica"],
+      },
+      {
+        title: "Finalistas",
+        count: "3",
+        candidate: ["LS", "Laura Santos", "95%", "Lista para decisión"],
+      },
     ];
 
     return (
-      <div className="absolute bottom-0 left-3 right-3 z-30 overflow-hidden rounded-t-[18px] border border-emerald-300/20 bg-[#08110E]/95 shadow-2xl backdrop-blur-xl">
+      <div className="absolute bottom-0 left-3 right-3 z-30 h-[290px] overflow-hidden rounded-t-[18px] border border-emerald-300/20 bg-[#07100D]/95 shadow-2xl backdrop-blur-xl">
         <div className="flex h-10 items-center border-b border-white/[0.06] px-4">
           <div className="flex items-center gap-2 text-[10px] font-semibold">
             <div className="size-4 rounded-md bg-emerald-500" />
@@ -351,61 +363,62 @@ function DashboardPreview({ brand }: { brand: string }) {
           </div>
         </div>
 
-        <div className="min-h-[214px] p-3">
-          <div className="flex items-end justify-between">
+        <div className="h-[250px] p-3">
+          <div className="flex items-center justify-between">
             <div>
-              <p className="text-[12px] font-medium text-white">Product Designer</p>
-              <p className="mt-0.5 text-[6.5px] text-zinc-500">Pipeline de contratación · 48 candidatos</p>
+              <p className="text-[12px] font-medium text-white">Pipeline · Product Designer</p>
+              <p className="mt-0.5 text-[6px] text-zinc-500">Vacante activa · 48 candidatos</p>
             </div>
-            <span className="rounded-full border border-emerald-400/20 bg-emerald-500/10 px-2.5 py-1 text-[6px] text-emerald-300">
-              Vacante activa
+            <span className="rounded-full bg-emerald-500/12 px-2.5 py-1 text-[6px] text-emerald-300">
+              + Candidato
             </span>
           </div>
 
           <div className="mt-3 grid grid-cols-5 gap-1.5">
-            {stages.map(([value, label], index) => (
+            {funnel.map(([value, label], index) => (
               <div
                 key={label}
-                className={`relative rounded-lg border px-2 py-2 ${
+                className={`relative rounded-lg border px-2 py-1.5 ${
                   index === 0
                     ? "border-emerald-400/20 bg-emerald-500/10"
                     : "border-white/[0.05] bg-white/[0.025]"
                 }`}
               >
-                <strong className="text-[12px] font-medium text-white">{value}</strong>
-                <p className="mt-0.5 text-[6px] text-zinc-500">{label}</p>
-                {index < stages.length - 1 && (
-                  <span className="absolute -right-1 top-1/2 h-px w-1.5 bg-emerald-400/20" />
-                )}
+                <strong className="text-[10px] font-medium text-white">{value}</strong>
+                <p className="mt-0.5 text-[5.5px] text-zinc-500">{label}</p>
               </div>
             ))}
           </div>
 
           <div className="mt-3 grid grid-cols-3 gap-2">
-            {candidates.map(([initials, name, stage, score], index) => (
+            {columns.map(({ title, count, candidate }, index) => (
               <div
-                key={name}
-                className="rounded-xl border border-white/[0.055] bg-white/[0.025] p-2.5"
+                key={title}
+                className="rounded-xl border border-white/[0.055] bg-white/[0.018] p-2"
               >
-                <div className="flex items-center">
-                  <div className="grid size-7 shrink-0 place-items-center rounded-full bg-emerald-500/15 text-[7px] font-semibold text-emerald-300">
-                    {initials}
-                  </div>
-                  <div className="ml-2 min-w-0">
-                    <p className="truncate text-[8px] font-medium text-white">{name}</p>
-                    <p className="mt-0.5 text-[6px] text-zinc-500">Product Designer</p>
-                  </div>
+                <div className="flex items-center justify-between">
+                  <p className="text-[7px] font-medium text-zinc-300">{title}</p>
+                  <span className="rounded-full bg-white/[0.04] px-1.5 py-0.5 text-[5.5px] text-zinc-500">
+                    {count}
+                  </span>
                 </div>
 
-                <div className="mt-2 flex items-center justify-between border-t border-white/[0.05] pt-2">
-                  <span className="rounded-full bg-white/[0.04] px-2 py-1 text-[5.5px] text-zinc-400">
-                    {stage}
-                  </span>
-                  <div className="text-right">
-                    <p className={`text-[8px] font-medium ${index === 2 ? "text-emerald-300" : "text-zinc-300"}`}>
-                      {score}
+                <div className="mt-2 rounded-lg border border-white/[0.055] bg-[#0B1713] p-2">
+                  <div className="flex items-center">
+                    <div className="grid size-7 shrink-0 place-items-center rounded-full bg-emerald-500/15 text-[7px] font-semibold text-emerald-300">
+                      {candidate[0]}
+                    </div>
+                    <div className="ml-2 min-w-0">
+                      <p className="truncate text-[7.5px] font-medium text-white">{candidate[1]}</p>
+                      <p className="mt-0.5 text-[5.5px] text-zinc-500">Product Designer</p>
+                    </div>
+                    <p className={`ml-auto text-[7px] font-medium ${index === 2 ? "text-emerald-300" : "text-zinc-300"}`}>
+                      {candidate[2]}
                     </p>
-                    <p className="text-[5px] text-zinc-600">match</p>
+                  </div>
+
+                  <div className="mt-2 border-t border-white/[0.05] pt-1.5">
+                    <p className="text-[5.5px] text-zinc-500">{candidate[3]}</p>
                   </div>
                 </div>
               </div>
@@ -417,7 +430,7 @@ function DashboardPreview({ brand }: { brand: string }) {
   }
 
   return (
-    <div className="absolute bottom-0 left-3 right-3 z-30 overflow-hidden rounded-t-2xl border border-white/20 bg-[#0B0E12]/95 shadow-2xl backdrop-blur-xl">
+    <div className="absolute bottom-0 left-3 right-3 z-30 h-[290px] overflow-hidden rounded-t-2xl border border-white/20 bg-[#0B0E12]/95 shadow-2xl backdrop-blur-xl">
       <div className="flex h-10 items-center border-b border-white/[0.05] px-4">
         <div className="flex items-center gap-2 text-[10px] font-semibold">
           <div className="size-4 rounded-md bg-blue-600" />
@@ -427,7 +440,7 @@ function DashboardPreview({ brand }: { brand: string }) {
           <Search size={11} className="text-zinc-500" />
         </div>
       </div>
-      <div className="grid min-h-[180px] grid-cols-[88px_1fr]">
+      <div className="grid h-[250px] grid-cols-[88px_1fr]">
         <aside className="border-r border-white/[0.06] p-2 text-[7px] text-zinc-400">
           {["Inicio", "Personas", "Tiempo", "Reportes", "Configuración"].map((item, index) => (
             <div
