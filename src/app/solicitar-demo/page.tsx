@@ -2,15 +2,50 @@
 
 import { FormEvent, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, LoaderCircle } from "lucide-react";
 import { SiteHeader } from "@/components/zolven/SiteHeader";
+import { supabase } from "@/lib/supabase/client";
 
 export default function SolicitarDemoPage() {
-  const [ready, setReady] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setReady(true);
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    if (String(formData.get("website") ?? "").trim()) {
+      setSubmitted(true);
+      return;
+    }
+
+    setSubmitting(true);
+    setErrorMessage(null);
+
+    const { error } = await supabase.from("demo_requests").insert({
+      name: String(formData.get("name") ?? "").trim(),
+      company: String(formData.get("company") ?? "").trim(),
+      email: String(formData.get("email") ?? "").trim().toLowerCase(),
+      team_size: String(formData.get("teamSize") ?? ""),
+      product: String(formData.get("product") ?? ""),
+      context: String(formData.get("context") ?? "").trim(),
+    });
+
+    if (error) {
+      console.error("Demo request submission failed", error);
+      setErrorMessage(
+        "No pudimos enviar la solicitud en este momento. Intenta nuevamente."
+      );
+      setSubmitting(false);
+      return;
+    }
+
+    form.reset();
+    setSubmitting(false);
+    setSubmitted(true);
   }
 
   return (
@@ -19,16 +54,24 @@ export default function SolicitarDemoPage() {
         <SiteHeader dark />
       </div>
 
-      <section className="mx-auto grid max-w-[1280px] gap-14 px-7 py-20 lg:grid-cols-[.8fr_1.2fr] lg:px-14">
+      <section className="mx-auto grid max-w-[1280px] gap-12 px-5 py-14 sm:px-7 sm:py-20 lg:grid-cols-[.8fr_1.2fr] lg:gap-14 lg:px-14">
         <div>
-          <Link href="/" className="inline-flex items-center gap-2 text-[12px] text-zinc-500 hover:text-white">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-[12px] text-zinc-500 transition-colors hover:text-white"
+          >
             <ArrowLeft size={14} /> Volver
           </Link>
-          <p className="mt-14 text-[10px] uppercase tracking-[0.28em] text-blue-300">SOLICITAR DEMO</p>
-          <h1 className="mt-4 max-w-[500px] text-[52px] font-semibold leading-[.98] tracking-[-0.055em]">
+
+          <p className="mt-10 text-[10px] uppercase tracking-[0.28em] text-blue-300 sm:mt-14">
+            SOLICITAR DEMO
+          </p>
+
+          <h1 className="mt-4 max-w-[500px] text-[40px] font-semibold leading-[.98] tracking-[-0.055em] sm:text-[52px]">
             Conoce cómo ZOLVEN puede encajar en tu operación.
           </h1>
-          <p className="mt-5 max-w-[500px] text-[16px] leading-[1.6] text-zinc-400">
+
+          <p className="mt-5 max-w-[500px] text-[15px] leading-[1.6] text-zinc-400 sm:text-[16px]">
             Cuéntanos qué quieres mejorar y qué producto te interesa. Usaremos esta información para preparar una conversación enfocada en tu contexto.
           </p>
 
@@ -38,73 +81,152 @@ export default function SolicitarDemoPage() {
               "Visión de Opex, Hire, Jobs y ZOLVEN One",
               "Siguiente paso definido según tus necesidades",
             ].map((item) => (
-              <div key={item} className="flex items-center gap-3 text-[12px] text-zinc-400">
-                <CheckCircle2 size={15} className="text-blue-300" /> {item}
+              <div
+                key={item}
+                className="flex items-center gap-3 text-[12px] text-zinc-400"
+              >
+                <CheckCircle2 size={15} className="text-blue-300" />
+                {item}
               </div>
             ))}
           </div>
         </div>
 
-        <div className="rounded-[28px] border border-white/[0.07] bg-white/[0.025] p-7 lg:p-9">
-          {ready ? (
+        <div className="rounded-[28px] border border-white/[0.07] bg-white/[0.025] p-5 sm:p-7 lg:p-9">
+          {submitted ? (
             <div className="flex min-h-[470px] flex-col items-center justify-center text-center">
               <div className="grid size-12 place-items-center rounded-full bg-blue-500/10">
                 <CheckCircle2 size={22} className="text-blue-300" />
               </div>
-              <h2 className="mt-5 text-[24px] font-medium">Formulario preparado.</h2>
+
+              <h2 className="mt-5 text-[24px] font-medium">
+                Solicitud recibida.
+              </h2>
+
               <p className="mt-3 max-w-[420px] text-[13px] leading-[1.6] text-zinc-500">
-                La interfaz ya está lista. El envío persistente se habilitará cuando conectemos este formulario con Supabase en la fase de backend.
+                La información fue registrada correctamente. El equipo podrá revisar el contexto enviado antes del siguiente contacto.
               </p>
+
               <button
-                onClick={() => setReady(false)}
-                className="mt-6 rounded-full border border-white/15 px-5 py-2.5 text-[12px] text-zinc-300"
+                type="button"
+                onClick={() => setSubmitted(false)}
+                className="mt-6 rounded-full border border-white/15 px-5 py-2.5 text-[12px] text-zinc-300 transition-colors hover:border-white/30"
               >
-                Volver al formulario
+                Enviar otra solicitud
               </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
+              <div className="sr-only" aria-hidden="true">
+                <label>
+                  Sitio web
+                  <input name="website" tabIndex={-1} autoComplete="off" />
+                </label>
+              </div>
+
               <div className="grid gap-5 sm:grid-cols-2">
                 <label className="text-[11px] text-zinc-400">
                   Nombre
-                  <input required name="name" className="mt-2 h-11 w-full rounded-xl border border-white/[0.08] bg-black/20 px-3 text-[13px] text-white outline-none focus:border-blue-400/40" />
+                  <input
+                    required
+                    minLength={2}
+                    maxLength={120}
+                    name="name"
+                    autoComplete="name"
+                    className="mt-2 h-11 w-full rounded-xl border border-white/[0.08] bg-black/20 px-3 text-[13px] text-white outline-none transition-colors focus:border-blue-400/40"
+                  />
                 </label>
+
                 <label className="text-[11px] text-zinc-400">
                   Empresa
-                  <input required name="company" className="mt-2 h-11 w-full rounded-xl border border-white/[0.08] bg-black/20 px-3 text-[13px] text-white outline-none focus:border-blue-400/40" />
+                  <input
+                    required
+                    minLength={2}
+                    maxLength={160}
+                    name="company"
+                    autoComplete="organization"
+                    className="mt-2 h-11 w-full rounded-xl border border-white/[0.08] bg-black/20 px-3 text-[13px] text-white outline-none transition-colors focus:border-blue-400/40"
+                  />
                 </label>
+
                 <label className="text-[11px] text-zinc-400">
                   Correo corporativo
-                  <input required type="email" name="email" className="mt-2 h-11 w-full rounded-xl border border-white/[0.08] bg-black/20 px-3 text-[13px] text-white outline-none focus:border-blue-400/40" />
+                  <input
+                    required
+                    type="email"
+                    maxLength={254}
+                    name="email"
+                    autoComplete="email"
+                    className="mt-2 h-11 w-full rounded-xl border border-white/[0.08] bg-black/20 px-3 text-[13px] text-white outline-none transition-colors focus:border-blue-400/40"
+                  />
                 </label>
+
                 <label className="text-[11px] text-zinc-400">
                   Tamaño del equipo
-                  <select name="teamSize" className="mt-2 h-11 w-full rounded-xl border border-white/[0.08] bg-[#0B0D11] px-3 text-[13px] text-white outline-none focus:border-blue-400/40">
-                    <option>1–25</option>
-                    <option>26–100</option>
-                    <option>101–500</option>
-                    <option>500+</option>
+                  <select
+                    required
+                    name="teamSize"
+                    className="mt-2 h-11 w-full rounded-xl border border-white/[0.08] bg-[#0B0D11] px-3 text-[13px] text-white outline-none transition-colors focus:border-blue-400/40"
+                  >
+                    <option value="1–25">1–25</option>
+                    <option value="26–100">26–100</option>
+                    <option value="101–500">101–500</option>
+                    <option value="500+">500+</option>
                   </select>
                 </label>
               </div>
 
               <label className="mt-5 block text-[11px] text-zinc-400">
                 Producto de interés
-                <select name="product" className="mt-2 h-11 w-full rounded-xl border border-white/[0.08] bg-[#0B0D11] px-3 text-[13px] text-white outline-none focus:border-blue-400/40">
-                  <option>ZOLVEN Opex</option>
-                  <option>ZOLVEN Hire</option>
-                  <option>ZOLVEN Jobs</option>
-                  <option>ZOLVEN One</option>
+                <select
+                  required
+                  name="product"
+                  className="mt-2 h-11 w-full rounded-xl border border-white/[0.08] bg-[#0B0D11] px-3 text-[13px] text-white outline-none transition-colors focus:border-blue-400/40"
+                >
+                  <option value="ZOLVEN Opex">ZOLVEN Opex</option>
+                  <option value="ZOLVEN Hire">ZOLVEN Hire</option>
+                  <option value="ZOLVEN Jobs">ZOLVEN Jobs</option>
+                  <option value="ZOLVEN One">ZOLVEN One</option>
                 </select>
               </label>
 
               <label className="mt-5 block text-[11px] text-zinc-400">
                 ¿Qué quieres mejorar?
-                <textarea required name="context" rows={5} className="mt-2 w-full resize-none rounded-xl border border-white/[0.08] bg-black/20 p-3 text-[13px] text-white outline-none focus:border-blue-400/40" />
+                <textarea
+                  required
+                  minLength={5}
+                  maxLength={3000}
+                  name="context"
+                  rows={5}
+                  className="mt-2 w-full resize-none rounded-xl border border-white/[0.08] bg-black/20 p-3 text-[13px] text-white outline-none transition-colors focus:border-blue-400/40"
+                />
               </label>
 
-              <button type="submit" className="mt-6 flex h-11 w-full items-center justify-center gap-3 rounded-full bg-blue-600 text-[13px] font-medium">
-                Continuar <ArrowRight size={15} />
+              {errorMessage && (
+                <p
+                  role="alert"
+                  className="mt-4 rounded-xl border border-red-400/15 bg-red-400/[0.05] px-3 py-2.5 text-[11px] text-red-200"
+                >
+                  {errorMessage}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="mt-6 flex h-11 w-full items-center justify-center gap-3 rounded-full bg-blue-600 text-[13px] font-medium transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {submitting ? (
+                  <>
+                    Enviando
+                    <LoaderCircle size={15} className="animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    Solicitar demo
+                    <ArrowRight size={15} />
+                  </>
+                )}
               </button>
             </form>
           )}
