@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { SiteHeader } from "@/components/zolven/SiteHeader";
 import {
@@ -97,11 +98,16 @@ function Hero() {
   return (
     <section className="relative min-h-[390px] overflow-hidden bg-[#F7F8FA] text-[#09090B] sm:min-h-[350px] lg:min-h-[313px]">
       <div className="absolute inset-y-0 left-[39%] right-[10%] hidden overflow-hidden bg-[#0A0B0E] lg:block [clip-path:polygon(19%_0,100%_0,80%_100%,0_100%)]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_25%,rgba(59,130,246,0.10),transparent_42%)]" />
-        <div className="absolute inset-0">
-          <div className="absolute left-[44%] top-[18%] h-[210px] w-[210px] rounded-full bg-blue-500/[0.05] blur-3xl" />
-          <div className="absolute bottom-[-38%] left-[42%] h-[300px] w-[230px] rounded-[48%_48%_18%_18%] bg-white/[0.025] blur-xl" />
-        </div>
+        <Image
+          src="/images/hero/hero-woman.webp"
+          alt=""
+          fill
+          priority
+          sizes="51vw"
+          className="object-cover object-[58%_40%] opacity-90"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,11,14,.92)_0%,rgba(10,11,14,.34)_34%,rgba(10,11,14,.08)_67%,rgba(10,11,14,.36)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_62%_30%,rgba(53,92,255,.08),transparent_44%)]" />
       </div>
 
       <SiteHeader />
