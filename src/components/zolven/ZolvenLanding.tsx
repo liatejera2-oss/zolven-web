@@ -95,7 +95,7 @@ export function ZolvenLanding() {
 
 function Hero() {
   return (
-    <section className="relative min-h-[313px] overflow-hidden bg-[#F7F8FA] text-[#09090B]">
+    <section className="relative min-h-[390px] overflow-hidden bg-[#F7F8FA] text-[#09090B] sm:min-h-[350px] lg:min-h-[313px]">
       <div className="absolute inset-y-0 left-[39%] right-[10%] hidden overflow-hidden bg-[#0A0B0E] lg:block [clip-path:polygon(19%_0,100%_0,80%_100%,0_100%)]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_25%,rgba(59,130,246,0.10),transparent_42%)]" />
         <div className="absolute inset-0">
@@ -106,17 +106,17 @@ function Hero() {
 
       <SiteHeader />
 
-      <div className="relative z-20 mx-auto h-[237px] max-w-[1536px] px-7 lg:px-14">
-        <div className="max-w-[660px] pt-4">
-          <h1 className="max-w-[640px] text-[42px] font-semibold leading-[0.98] tracking-[-0.045em] lg:text-[45px]">
+      <div className="relative z-20 mx-auto min-h-[314px] max-w-[1536px] px-5 pb-8 sm:min-h-[274px] sm:px-7 lg:h-[237px] lg:min-h-0 lg:px-14 lg:pb-0">
+        <div className="max-w-[660px] pt-5 sm:pt-4">
+          <h1 className="max-w-[640px] text-[36px] font-semibold leading-[0.98] tracking-[-0.045em] sm:text-[42px] lg:text-[45px]">
             Personas, operaciones<br />y crecimiento conectados.
           </h1>
 
-          <p className="mt-2 max-w-[470px] text-[18px] leading-[1.35] text-zinc-600">
+          <p className="mt-3 max-w-[470px] text-[16px] leading-[1.4] text-zinc-600 sm:text-[18px]">
             Tecnología para empresas que quieren operar mejor hoy y construir lo que viene.
           </p>
 
-          <div className="mt-3 flex flex-wrap gap-3">
+          <div className="mt-5 flex flex-wrap gap-3 sm:mt-3">
             <button className="flex h-10 items-center gap-2 rounded-full bg-[#09090B] px-5 text-sm font-medium text-white">
               Conoce Zolven <ArrowRight size={16} />
             </button>
@@ -169,26 +169,26 @@ function ProductCard({
   accent: string;
 }) {
   return (
-    <article className={`relative min-h-[585px] overflow-hidden border ${border} ${gradient}`}>
-      <div className="relative z-20 px-7 pt-6">
+    <article className={`relative min-h-[620px] overflow-hidden border sm:min-h-[600px] lg:min-h-[585px] ${border} ${gradient}`}>
+      <div className="relative z-20 px-5 pt-6 sm:px-7">
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className={`size-8 rounded-xl ${accent} shadow-lg`} />
             <Link href={href} className="text-[25px] font-semibold tracking-[-0.04em] transition-opacity hover:opacity-80"><span className="font-bold">ZOLVEN</span> <span className="font-light">{brand}</span></Link>
           </div>
-          <div className="max-w-[155px] text-right text-[8px] uppercase leading-[1.65] tracking-[0.32em] text-white/80">{label}</div>
+          <div className="hidden max-w-[155px] text-right text-[8px] uppercase leading-[1.65] tracking-[0.32em] text-white/80 sm:block">{label}</div>
         </div>
 
-        <Link href={href} className="mt-7 block max-w-[330px] text-[29px] font-medium leading-[0.98] tracking-[-0.04em] transition-opacity hover:opacity-80">{title}</Link>
+        <Link href={href} className="mt-7 block max-w-[330px] text-[27px] font-medium sm:text-[29px] leading-[0.98] tracking-[-0.04em] transition-opacity hover:opacity-80">{title}</Link>
         <p className="mt-3 max-w-[320px] text-[13px] leading-[1.4] text-white/75">{description}</p>
 
-        <div className="mt-4 flex gap-3">
+        <div className="mt-4 flex flex-wrap gap-3">
           <Link href={href} className={`flex h-9 items-center gap-5 rounded-full px-5 text-[11px] font-medium ${accent}`}>{primary}<ArrowRight size={13} /></Link>
           <Link href={`${href}#tour`} className="flex h-9 items-center rounded-full border border-white/45 px-5 text-[11px]">{secondary}</Link>
         </div>
       </div>
 
-      <div className="absolute right-[-5px] top-[64px] z-10 h-[200px] w-[48%]">
+      <div className="absolute right-[-5px] top-[64px] z-10 hidden h-[200px] w-[48%] sm:block">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_25%,rgba(255,255,255,.035),transparent_45%)]" />
         <span className="absolute bottom-2 right-4 rotate-[-7deg] max-w-[120px] text-right text-[10px] italic leading-tight text-white/90">{note}</span>
       </div>
@@ -220,7 +220,7 @@ function DashboardPreview({ brand }: { brand: string }) {
           </div>
         </div>
 
-        <div className="grid h-[250px] grid-cols-[92px_1fr]">
+        <div className="grid h-[250px] grid-cols-[76px_1fr] sm:grid-cols-[92px_1fr]">
           <aside className="border-r border-white/[0.06] p-2 text-[7px] text-zinc-500">
             <div className="mb-1 rounded-md bg-violet-500/15 px-2 py-1.5 text-violet-300">
               Para ti
@@ -413,7 +413,7 @@ function DashboardPreview({ brand }: { brand: string }) {
         </div>
       </div>
 
-      <div className="grid h-[250px] grid-cols-[92px_1fr]">
+      <div className="grid h-[250px] grid-cols-[76px_1fr] sm:grid-cols-[92px_1fr]">
         <aside className="border-r border-white/[0.06] p-2 text-[7px] text-zinc-500">
           <div className="mb-1 rounded-md bg-blue-500/15 px-2 py-1.5 text-blue-300">
             Resumen
@@ -554,9 +554,9 @@ function EcosystemBar() {
 function Footer() {
   return (
     <footer className="border-t border-white/[0.06] bg-[#07090B]">
-      <div className="mx-auto grid h-11 max-w-[1536px] grid-cols-3 items-center px-10">
+      <div className="mx-auto grid h-11 max-w-[1536px] grid-cols-[1fr_auto] items-center px-5 sm:grid-cols-3 sm:px-10">
         <span className="text-[14px] font-bold tracking-[-0.04em]">ZOLVEN</span>
-        <span className="text-center text-[7px] uppercase tracking-[0.48em] text-zinc-500">Simplify · Connect · Empower</span>
+        <span className="hidden text-center text-[7px] uppercase tracking-[0.48em] text-zinc-500 sm:block">Simplify · Connect · Empower</span>
         <span className="text-right text-[7px] uppercase tracking-[0.34em] text-zinc-500">Zolven.com</span>
       </div>
     </footer>
