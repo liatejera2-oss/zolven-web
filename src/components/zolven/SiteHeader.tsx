@@ -76,9 +76,6 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
           <Link href="/industrias" className="transition-opacity hover:opacity-60">
             Industrias
           </Link>
-          <Link href="/recursos" className="transition-opacity hover:opacity-60">
-            Recursos
-          </Link>
           <Link href="/precios" className="transition-opacity hover:opacity-60">
             Precios
           </Link>
