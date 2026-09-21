@@ -429,41 +429,129 @@ function DashboardPreview({ brand }: { brand: string }) {
     );
   }
 
+  const attendance = [78, 92, 88, 96, 90, 97, 94];
+
   return (
-    <div className="absolute bottom-0 left-3 right-3 z-30 h-[290px] overflow-hidden rounded-t-2xl border border-white/20 bg-[#0B0E12]/95 shadow-2xl backdrop-blur-xl">
-      <div className="flex h-10 items-center border-b border-white/[0.05] px-4">
+    <div className="absolute bottom-0 left-3 right-3 z-30 h-[290px] overflow-hidden rounded-t-[18px] border border-blue-300/20 bg-[#08111F]/95 shadow-2xl backdrop-blur-xl">
+      <div className="flex h-10 items-center border-b border-white/[0.06] px-4">
         <div className="flex items-center gap-2 text-[10px] font-semibold">
           <div className="size-4 rounded-md bg-blue-600" />
-          ZOLVEN <span className="font-normal text-zinc-400">{brand}</span>
+          ZOLVEN <span className="font-normal text-zinc-400">Opex</span>
         </div>
-        <div className="ml-auto">
-          <Search size={11} className="text-zinc-500" />
+        <div className="ml-auto flex items-center gap-3 text-[7px] text-zinc-500">
+          <span>Personas</span>
+          <span>Tiempo</span>
+          <span>Nómina</span>
         </div>
       </div>
-      <div className="grid h-[250px] grid-cols-[88px_1fr]">
-        <aside className="border-r border-white/[0.06] p-2 text-[7px] text-zinc-400">
-          {["Inicio", "Personas", "Tiempo", "Reportes", "Configuración"].map((item, index) => (
-            <div
-              key={item}
-              className={`mb-1 rounded-md px-2 py-1.5 ${index === 0 ? "bg-blue-500/20 text-blue-300" : ""}`}
-            >
+
+      <div className="grid h-[250px] grid-cols-[92px_1fr]">
+        <aside className="border-r border-white/[0.06] p-2 text-[7px] text-zinc-500">
+          <div className="mb-1 rounded-md bg-blue-500/15 px-2 py-1.5 text-blue-300">
+            Resumen
+          </div>
+          {["Personas", "Tiempo", "Ausencias", "Nómina", "Cumplimiento"].map((item) => (
+            <div key={item} className="mb-1 rounded-md px-2 py-1.5">
               {item}
             </div>
           ))}
+          <div className="mt-3 border-t border-white/[0.05] pt-3">
+            <p className="px-2 text-[6px] uppercase tracking-[0.18em] text-zinc-600">
+              Cierre de nómina
+            </p>
+            <p className="mt-1.5 px-2 text-[7px] font-medium text-zinc-300">28 sep</p>
+            <p className="mt-0.5 px-2 text-[6px] text-blue-300">7 días restantes</p>
+          </div>
         </aside>
+
         <div className="p-3">
-          <p className="text-[12px] font-medium">
-            {brand === "Opex" ? "Hola, María" : "Pipeline · Product Designer"}
-          </p>
-          <div className="mt-3 grid grid-cols-3 gap-2">
-            {[["248", "Personas"], ["96%", "Asistencia"], ["12", "Alertas"]].map(([value, label]) => (
-              <div key={label} className="rounded-lg bg-white/[0.045] p-2">
-                <strong className="text-[13px] font-medium">{value}</strong>
-                <p className="text-[7px] text-zinc-500">{label}</p>
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-[12px] font-medium text-white">Hola, María</p>
+              <p className="mt-0.5 text-[6px] text-zinc-500">Resumen operativo · Hoy</p>
+            </div>
+            <span className="rounded-full bg-blue-500/10 px-2.5 py-1 text-[6px] text-blue-300">
+              Operación estable
+            </span>
+          </div>
+
+          <div className="mt-3 grid grid-cols-3 gap-1.5">
+            {[
+              ["248", "Personas activas", "+4 este mes"],
+              ["96%", "Asistencia hoy", "238 presentes"],
+              ["12", "Alertas abiertas", "3 prioritarias"],
+            ].map(([value, label, detail], index) => (
+              <div
+                key={label}
+                className={`rounded-lg border px-2 py-2 ${
+                  index === 1
+                    ? "border-blue-400/20 bg-blue-500/10"
+                    : "border-white/[0.05] bg-white/[0.025]"
+                }`}
+              >
+                <strong className="text-[11px] font-medium text-white">{value}</strong>
+                <p className="mt-0.5 text-[5.8px] text-zinc-400">{label}</p>
+                <p className="mt-1 text-[5.2px] text-zinc-600">{detail}</p>
               </div>
             ))}
           </div>
-          <div className="mt-3 h-[58px] rounded-xl bg-white/[0.035]" />
+
+          <div className="mt-3 grid grid-cols-[1.15fr_.85fr] gap-2">
+            <div className="rounded-xl border border-white/[0.055] bg-white/[0.02] p-2">
+              <div className="flex items-center justify-between">
+                <p className="text-[7px] font-medium text-zinc-300">Asistencia · últimos 7 días</p>
+                <span className="text-[5.5px] text-blue-300">Prom. 91%</span>
+              </div>
+              <div className="mt-2 flex h-[54px] items-end gap-1.5">
+                {attendance.map((value, index) => (
+                  <div key={index} className="flex flex-1 flex-col items-center justify-end">
+                    <div className="flex h-[42px] w-full items-end rounded-sm bg-white/[0.025]">
+                      <div
+                        className="w-full rounded-sm bg-blue-500/70"
+                        style={{ height: `${Math.max(18, Math.round(value * 0.42))}px` }}
+                      />
+                    </div>
+                    <span className="mt-1 text-[4.8px] text-zinc-600">
+                      {["L", "M", "X", "J", "V", "S", "D"][index]}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <div className="rounded-xl border border-white/[0.055] bg-white/[0.02] p-2">
+                <div className="flex items-center justify-between">
+                  <p className="text-[7px] font-medium text-zinc-300">Próximas ausencias</p>
+                  <span className="text-[5.5px] text-blue-300">5 esta semana</span>
+                </div>
+                <div className="mt-2 space-y-1.5">
+                  {[
+                    ["LT", "Lia Tejera", "23–24 sep"],
+                    ["AM", "Ana Méndez", "26 sep"],
+                  ].map(([initials, name, date]) => (
+                    <div key={name} className="flex items-center">
+                      <div className="grid size-5 place-items-center rounded-full bg-blue-500/15 text-[5.5px] font-semibold text-blue-300">
+                        {initials}
+                      </div>
+                      <div className="ml-1.5 min-w-0">
+                        <p className="truncate text-[6px] text-zinc-300">{name}</p>
+                        <p className="text-[5px] text-zinc-600">{date}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between rounded-lg border border-amber-300/10 bg-amber-400/[0.04] px-2 py-1.5">
+                <div>
+                  <p className="text-[5.8px] font-medium text-zinc-300">Cumplimiento</p>
+                  <p className="mt-0.5 text-[5px] text-zinc-600">3 documentos por vencer</p>
+                </div>
+                <span className="text-[6px] text-amber-300">Revisar</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
