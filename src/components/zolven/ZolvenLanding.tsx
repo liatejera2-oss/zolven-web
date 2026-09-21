@@ -231,23 +231,129 @@ function ProductCard({
 }
 
 function DashboardPreview({ brand }: { brand: string }) {
+  if (brand === "Jobs") {
+    const jobs = [
+      ["Product Designer", "Remote · Product", "Hace 2 h"],
+      ["Operations Analyst", "Panamá · Operaciones", "Hace 5 h"],
+      ["Customer Success Specialist", "Híbrido · Customer Success", "Hoy"],
+    ];
+
+    return (
+      <div className="absolute bottom-0 left-3 right-3 z-30 overflow-hidden rounded-t-[18px] border border-violet-300/20 bg-[#0A0B10]/95 shadow-2xl backdrop-blur-xl">
+        <div className="flex h-10 items-center border-b border-white/[0.06] px-4">
+          <div className="flex items-center gap-2 text-[10px] font-semibold">
+            <div className="size-4 rounded-md bg-violet-600" />
+            ZOLVEN <span className="font-normal text-zinc-400">Jobs</span>
+          </div>
+          <div className="ml-auto flex items-center gap-3 text-[7px] text-zinc-500">
+            <span>Oportunidades</span>
+            <span>Guardados</span>
+            <span>Perfil</span>
+          </div>
+        </div>
+
+        <div className="grid min-h-[214px] grid-cols-[92px_1fr]">
+          <aside className="border-r border-white/[0.06] p-2 text-[7px] text-zinc-500">
+            <div className="mb-1 rounded-md bg-violet-500/15 px-2 py-1.5 text-violet-300">
+              Para ti
+            </div>
+            {["Explorar", "Empresas", "Guardados", "Aplicaciones"].map((item) => (
+              <div key={item} className="mb-1 rounded-md px-2 py-1.5">
+                {item}
+              </div>
+            ))}
+            <div className="mt-4 border-t border-white/[0.05] pt-3">
+              <p className="px-2 text-[6px] uppercase tracking-[0.18em] text-zinc-600">Tu perfil</p>
+              <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/[0.06]">
+                <div className="h-full w-[78%] rounded-full bg-violet-500" />
+              </div>
+              <p className="mt-1 px-2 text-[6px] text-zinc-600">78% completo</p>
+            </div>
+          </aside>
+
+          <div className="p-3">
+            <div className="flex h-8 items-center rounded-lg border border-white/[0.07] bg-white/[0.035] px-3">
+              <Search size={11} className="text-zinc-500" />
+              <span className="ml-2 text-[7px] text-zinc-500">Cargo, empresa o palabra clave</span>
+              <span className="ml-auto rounded-md bg-violet-500/15 px-2 py-1 text-[6px] text-violet-300">
+                Buscar
+              </span>
+            </div>
+
+            <div className="mt-2 flex gap-1.5">
+              {["Remoto", "Tecnología", "Tiempo completo"].map((filter) => (
+                <span
+                  key={filter}
+                  className="rounded-full border border-white/[0.07] bg-white/[0.025] px-2 py-1 text-[6px] text-zinc-400"
+                >
+                  {filter}
+                </span>
+              ))}
+            </div>
+
+            <div className="mt-3 flex items-center justify-between">
+              <p className="text-[11px] font-medium">Empleos recomendados</p>
+              <span className="text-[6px] text-violet-300">Ver todos</span>
+            </div>
+
+            <div className="mt-2 space-y-1.5">
+              {jobs.map(([title, meta, time], index) => (
+                <div
+                  key={title}
+                  className="flex items-center rounded-lg border border-white/[0.05] bg-white/[0.025] px-2.5 py-2"
+                >
+                  <div className="grid size-7 shrink-0 place-items-center rounded-lg bg-violet-500/15">
+                    <BriefcaseBusiness size={11} className="text-violet-300" />
+                  </div>
+                  <div className="ml-2 min-w-0">
+                    <p className="truncate text-[8px] font-medium text-white">{title}</p>
+                    <p className="mt-0.5 text-[6px] text-zinc-500">{meta}</p>
+                  </div>
+                  <div className="ml-auto text-right">
+                    <p className="text-[6px] text-zinc-600">{time}</p>
+                    <span className={`mt-1 inline-block size-1.5 rounded-full ${index === 0 ? "bg-violet-400" : "bg-white/20"}`} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="absolute bottom-0 left-3 right-3 z-30 overflow-hidden rounded-t-2xl border border-white/20 bg-[#0B0E12]/95 shadow-2xl backdrop-blur-xl">
       <div className="flex h-10 items-center border-b border-white/[0.05] px-4">
-        <div className="flex items-center gap-2 text-[10px] font-semibold"><div className="size-4 rounded-md bg-blue-600" />ZOLVEN <span className="font-normal text-zinc-400">{brand}</span></div>
-        <div className="ml-auto"><Search size={11} className="text-zinc-500" /></div>
+        <div className="flex items-center gap-2 text-[10px] font-semibold">
+          <div className="size-4 rounded-md bg-blue-600" />
+          ZOLVEN <span className="font-normal text-zinc-400">{brand}</span>
+        </div>
+        <div className="ml-auto">
+          <Search size={11} className="text-zinc-500" />
+        </div>
       </div>
       <div className="grid min-h-[180px] grid-cols-[88px_1fr]">
         <aside className="border-r border-white/[0.06] p-2 text-[7px] text-zinc-400">
-          {['Inicio','Personas','Tiempo','Reportes','Configuración'].map((item, index) => (
-            <div key={item} className={`mb-1 rounded-md px-2 py-1.5 ${index === 0 ? 'bg-blue-500/20 text-blue-300' : ''}`}>{item}</div>
+          {["Inicio", "Personas", "Tiempo", "Reportes", "Configuración"].map((item, index) => (
+            <div
+              key={item}
+              className={`mb-1 rounded-md px-2 py-1.5 ${index === 0 ? "bg-blue-500/20 text-blue-300" : ""}`}
+            >
+              {item}
+            </div>
           ))}
         </aside>
         <div className="p-3">
-          <p className="text-[12px] font-medium">{brand === 'Opex' ? 'Hola, María' : brand === 'Hire' ? 'Pipeline · Product Designer' : 'Empleos recomendados'}</p>
+          <p className="text-[12px] font-medium">
+            {brand === "Opex" ? "Hola, María" : "Pipeline · Product Designer"}
+          </p>
           <div className="mt-3 grid grid-cols-3 gap-2">
-            {[['248','Personas'],['96%','Asistencia'],['12','Alertas']].map(([value,label]) => (
-              <div key={label} className="rounded-lg bg-white/[0.045] p-2"><strong className="text-[13px] font-medium">{value}</strong><p className="text-[7px] text-zinc-500">{label}</p></div>
+            {[["248", "Personas"], ["96%", "Asistencia"], ["12", "Alertas"]].map(([value, label]) => (
+              <div key={label} className="rounded-lg bg-white/[0.045] p-2">
+                <strong className="text-[13px] font-medium">{value}</strong>
+                <p className="text-[7px] text-zinc-500">{label}</p>
+              </div>
             ))}
           </div>
           <div className="mt-3 h-[58px] rounded-xl bg-white/[0.035]" />
