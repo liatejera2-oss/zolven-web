@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, MessageSquareText } from "lucide-react";
 
 const products = [
   ["ZOLVEN Opex", "/productos/opex"],
@@ -31,13 +31,13 @@ export function SiteFooter() {
               Business Technology para conectar personas, operaciones y crecimiento.
             </p>
 
-            <a
-              href="mailto:soporte@zolven.com"
+            <Link
+              href="/contacto"
               className="mt-6 inline-flex items-center gap-2 text-[12px] text-zinc-300 transition-colors hover:text-white"
             >
-              <Mail size={14} />
-              soporte@zolven.com
-            </a>
+              <MessageSquareText size={14} />
+              Contactar a ZOLVEN
+            </Link>
           </div>
 
           <div>
