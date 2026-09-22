@@ -16,6 +16,7 @@ import {
   Users,
 } from "lucide-react";
 import { SiteHeader } from "@/components/zolven/SiteHeader";
+import { SiteFooter } from "@/components/zolven/SiteFooter";
 
 function Shell({
   eyebrow,
@@ -46,6 +47,7 @@ function Shell({
       </section>
 
       {children}
+      <SiteFooter />
     </main>
   );
 }
