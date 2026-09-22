@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { SiteHeader } from "@/components/zolven/SiteHeader";
 import {
@@ -9,7 +8,6 @@ import {
   BriefcaseBusiness,
   Contact,
   FolderKanban,
-  Play,
   Search,
   ShoppingBag,
   UserCheck,
@@ -39,7 +37,7 @@ const products = [
     key: "hire",
     brand: "Hire",
     href: "/productos/hire",
-    imageSrc: "https://images.pexels.com/photos/4895434/pexels-photo-4895434.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    imageSrc: null,
     label: "GRANDES EQUIPOS EMPIEZAN AQUÍ",
     title: "Encuentra, evalúa, contrata.",
     description:
@@ -101,16 +99,8 @@ function Hero() {
   return (
     <section className="relative min-h-[390px] overflow-hidden bg-[#F7F8FA] text-[#09090B] sm:min-h-[350px] lg:min-h-[313px]">
       <div className="absolute inset-y-0 left-[39%] right-[10%] hidden overflow-hidden bg-[#0A0B0E] lg:block [clip-path:polygon(19%_0,100%_0,80%_100%,0_100%)]">
-        <Image
-          src="/images/hero/hero-woman.webp"
-          alt=""
-          fill
-          priority
-          sizes="51vw"
-          className="object-cover object-[58%_40%] opacity-90"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,11,14,.92)_0%,rgba(10,11,14,.34)_34%,rgba(10,11,14,.08)_67%,rgba(10,11,14,.36)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_62%_30%,rgba(53,92,255,.08),transparent_44%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_62%_30%,rgba(53,92,255,.10),transparent_44%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,.02),transparent_42%,rgba(53,92,255,.04))]" />
       </div>
 
       <SiteHeader />
@@ -126,15 +116,9 @@ function Hero() {
           </p>
 
           <div className="mt-5 flex flex-wrap gap-3 sm:mt-3">
-            <button className="flex h-10 items-center gap-2 rounded-full bg-[#09090B] px-5 text-sm font-medium text-white">
+            <Link href="#products" className="flex h-10 items-center gap-2 rounded-full bg-[#09090B] px-5 text-sm font-medium text-white">
               Conoce Zolven <ArrowRight size={16} />
-            </button>
-            <button className="flex h-10 items-center gap-3 rounded-full border border-zinc-300 px-5 text-sm font-medium text-zinc-700">
-              Ver video
-              <span className="grid size-6 place-items-center rounded-full border border-zinc-300">
-                <Play size={11} fill="currentColor" />
-              </span>
-            </button>
+            </Link>
           </div>
         </div>
 
