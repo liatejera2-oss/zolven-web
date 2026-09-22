@@ -42,6 +42,10 @@ type ProductConfig = {
   accentText: string;
   accentSoft: string;
   border: string;
+  primaryLabel: string;
+  primaryHref: string;
+  secondaryLabel: string;
+  secondaryHref: string;
   tabs: Tab[];
 };
 
@@ -56,6 +60,10 @@ const configs: Record<ProductKey, ProductConfig> = {
     accentText: "text-blue-300",
     accentSoft: "bg-blue-500/10",
     border: "border-blue-400/20",
+    primaryLabel: "Solicitar demo",
+    primaryHref: "/solicitar-demo",
+    secondaryLabel: "Ver producto",
+    secondaryHref: "#tour",
     tabs: [
       {
         label: "People",
@@ -117,6 +125,10 @@ const configs: Record<ProductKey, ProductConfig> = {
     accentText: "text-emerald-300",
     accentSoft: "bg-emerald-500/10",
     border: "border-emerald-400/20",
+    primaryLabel: "Solicitar demo",
+    primaryHref: "/solicitar-demo",
+    secondaryLabel: "Ver producto",
+    secondaryHref: "#tour",
     tabs: [
       {
         label: "Vacantes",
@@ -162,6 +174,10 @@ const configs: Record<ProductKey, ProductConfig> = {
     accentText: "text-violet-300",
     accentSoft: "bg-violet-500/10",
     border: "border-violet-400/20",
+    primaryLabel: "Explorar oportunidades",
+    primaryHref: "#tour",
+    secondaryLabel: "Crear perfil",
+    secondaryHref: "/acceso",
     tabs: [
       {
         label: "Explorar",
@@ -207,6 +223,10 @@ const configs: Record<ProductKey, ProductConfig> = {
     accentText: "text-blue-200",
     accentSoft: "bg-blue-500/10",
     border: "border-blue-300/20",
+    primaryLabel: "Solicitar demo",
+    primaryHref: "/solicitar-demo",
+    secondaryLabel: "Ver ecosistema",
+    secondaryHref: "#tour",
     tabs: [
       {
         label: "Ecosistema",
@@ -291,12 +311,12 @@ export function ProductExperience({ product }: { product: ProductKey }) {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/solicitar-demo" className={`inline-flex h-11 items-center gap-4 rounded-full px-6 text-[13px] font-medium ${config.accent}`}>
-                Solicitar demo <ArrowRight size={15} />
+              <Link href={config.primaryHref} className={`inline-flex h-11 items-center gap-4 rounded-full px-6 text-[13px] font-medium ${config.accent}`}>
+                {config.primaryLabel} <ArrowRight size={15} />
               </Link>
-              <a href="#tour" className="inline-flex h-11 items-center rounded-full border border-white/15 px-6 text-[13px] text-zinc-300">
-                Ver producto
-              </a>
+              <Link href={config.secondaryHref} className="inline-flex h-11 items-center rounded-full border border-white/15 px-6 text-[13px] text-zinc-300">
+                {config.secondaryLabel}
+              </Link>
             </div>
           </div>
 
