@@ -1,87 +1,240 @@
+"use client";
+
+import { FormEvent, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Mail, MessageSquareText } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  CheckCircle2,
+  LoaderCircle,
+  MessagesSquare,
+} from "lucide-react";
 import { SiteHeader } from "@/components/zolven/SiteHeader";
 import { SiteFooter } from "@/components/zolven/SiteFooter";
+import { supabase } from "@/lib/supabase/client";
+
+const reasons = [
+  "Información general",
+  "Soporte comercial",
+  "Alianzas",
+  "Prensa y marca",
+  "Otro",
+];
 
 export default function ContactPage() {
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    if (String(formData.get("website") ?? "").trim()) {
+      setSubmitted(true);
+      return;
+    }
+
+    setSubmitting(true);
+    setErrorMessage(null);
+
+    const company = String(formData.get("company") ?? "").trim();
+
+    const { error } = await supabase.from("contact_requests").insert({
+      name: String(formData.get("name") ?? "").trim(),
+      email: String(formData.get("email") ?? "").trim().toLowerCase(),
+      company: company || null,
+      reason: String(formData.get("reason") ?? ""),
+      message: String(formData.get("message") ?? "").trim(),
+    });
+
+    if (error) {
+      console.error("Contact request submission failed", error);
+      setErrorMessage(
+        "No pudimos enviar tu mensaje en este momento. Intenta nuevamente."
+      );
+      setSubmitting(false);
+      return;
+    }
+
+    form.reset();
+    setSubmitting(false);
+    setSubmitted(true);
+  }
+
   return (
     <main className="min-h-screen bg-[#080A0D] text-white">
       <div className="border-b border-white/[0.06] bg-[#0B0D11]">
         <SiteHeader dark />
       </div>
 
-      <section className="mx-auto max-w-[1180px] px-5 py-14 sm:px-7 sm:py-20 lg:px-14">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-[12px] text-zinc-500 transition-colors hover:text-white"
-        >
-          <ArrowLeft size={14} /> Volver
-        </Link>
+      <section className="mx-auto grid max-w-[1280px] gap-12 px-5 py-14 sm:px-7 sm:py-20 lg:grid-cols-[.82fr_1.18fr] lg:gap-14 lg:px-14">
+        <div>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-[12px] text-zinc-500 transition-colors hover:text-white"
+          >
+            <ArrowLeft size={14} /> Volver
+          </Link>
 
-        <div className="mt-10 grid gap-12 lg:grid-cols-[.9fr_1.1fr]">
-          <div>
-            <p className="text-[10px] uppercase tracking-[0.28em] text-blue-300">
-              CONTACTO
-            </p>
-            <h1 className="mt-4 max-w-[560px] text-[42px] font-semibold leading-[.98] tracking-[-0.055em] sm:text-[56px]">
-              Hablemos según lo que necesitas resolver.
-            </h1>
-            <p className="mt-5 max-w-[540px] text-[15px] leading-[1.6] text-zinc-400 sm:text-[17px]">
-              Para soporte, consultas operativas o seguimiento, utiliza nuestro correo oficial. Para conocer la plataforma o evaluar una implementación, solicita una demo.
-            </p>
+          <p className="mt-10 text-[10px] uppercase tracking-[0.28em] text-blue-300 sm:mt-14">
+            CONTACTO
+          </p>
+
+          <h1 className="mt-4 max-w-[520px] text-[40px] font-semibold leading-[.98] tracking-[-0.055em] sm:text-[52px]">
+            Hablemos sobre lo que necesitas resolver.
+          </h1>
+
+          <p className="mt-5 max-w-[500px] text-[15px] leading-[1.6] text-zinc-400 sm:text-[16px]">
+            Para consultas generales, alianzas o temas comerciales. Si lo que buscas es una demostración del producto, usa el flujo de Solicitar demo.
+          </p>
+
+          <div className="mt-10 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5">
+            <div className="flex items-start gap-3">
+              <div className="grid size-9 shrink-0 place-items-center rounded-xl bg-blue-500/10">
+                <MessagesSquare size={16} className="text-blue-300" />
+              </div>
+              <div>
+                <p className="text-[12px] font-medium">¿Quieres ver el producto?</p>
+                <p className="mt-1 text-[11px] leading-[1.5] text-zinc-500">
+                  El formulario de demo recoge más contexto operativo y nos permite preparar una conversación más útil.
+                </p>
+                <Link
+                  href="/solicitar-demo"
+                  className="mt-4 inline-flex items-center gap-2 text-[11px] font-medium text-blue-300"
+                >
+                  Solicitar demo <ArrowRight size={12} />
+                </Link>
+              </div>
+            </div>
           </div>
+        </div>
 
-          <div className="grid gap-3">
-            <a
-              href="mailto:soporte@zolven.com"
-              className="group rounded-[24px] border border-white/[0.07] bg-white/[0.02] p-6 transition-colors hover:bg-white/[0.04]"
-            >
-              <div className="flex items-start justify-between gap-5">
-                <div className="grid size-10 place-items-center rounded-xl bg-blue-500/10">
-                  <Mail size={18} className="text-blue-300" />
-                </div>
-                <ArrowRight
-                  size={15}
-                  className="mt-1 text-zinc-600 transition-transform group-hover:translate-x-1"
-                />
+        <div className="rounded-[28px] border border-white/[0.07] bg-white/[0.025] p-5 sm:p-7 lg:p-9">
+          {submitted ? (
+            <div className="flex min-h-[450px] flex-col items-center justify-center text-center">
+              <div className="grid size-12 place-items-center rounded-full bg-blue-500/10">
+                <CheckCircle2 size={22} className="text-blue-300" />
               </div>
 
-              <p className="mt-7 text-[9px] uppercase tracking-[0.22em] text-zinc-600">
-                SOPORTE Y CONTACTO GENERAL
-              </p>
-              <h2 className="mt-2 text-[24px] font-medium tracking-[-0.035em]">
-                soporte@zolven.com
-              </h2>
-              <p className="mt-3 text-[12px] leading-[1.6] text-zinc-500">
-                Consultas de soporte, seguimiento, acceso y coordinación general.
-              </p>
-            </a>
+              <h2 className="mt-5 text-[24px] font-medium">Mensaje recibido.</h2>
 
-            <Link
-              href="/solicitar-demo"
-              className="group rounded-[24px] border border-white/[0.07] bg-white/[0.02] p-6 transition-colors hover:bg-white/[0.04]"
-            >
-              <div className="flex items-start justify-between gap-5">
-                <div className="grid size-10 place-items-center rounded-xl bg-emerald-500/10">
-                  <MessageSquareText size={18} className="text-emerald-300" />
-                </div>
-                <ArrowRight
-                  size={15}
-                  className="mt-1 text-zinc-600 transition-transform group-hover:translate-x-1"
-                />
+              <p className="mt-3 max-w-[420px] text-[13px] leading-[1.6] text-zinc-500">
+                Tu consulta quedó registrada correctamente para seguimiento.
+              </p>
+
+              <button
+                type="button"
+                onClick={() => setSubmitted(false)}
+                className="mt-6 rounded-full border border-white/15 px-5 py-2.5 text-[12px] text-zinc-300 transition-colors hover:border-white/30"
+              >
+                Enviar otro mensaje
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <div className="sr-only" aria-hidden="true">
+                <label>
+                  Sitio web
+                  <input name="website" tabIndex={-1} autoComplete="off" />
+                </label>
               </div>
 
-              <p className="mt-7 text-[9px] uppercase tracking-[0.22em] text-zinc-600">
-                VENTAS Y DEMOSTRACIÓN
-              </p>
-              <h2 className="mt-2 text-[24px] font-medium tracking-[-0.035em]">
-                Solicitar demo
-              </h2>
-              <p className="mt-3 text-[12px] leading-[1.6] text-zinc-500">
-                Para evaluar ZOLVEN Opex, Hire, Jobs o One según tu operación.
-              </p>
-            </Link>
-          </div>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <label className="text-[11px] text-zinc-400">
+                  Nombre
+                  <input
+                    required
+                    minLength={2}
+                    maxLength={120}
+                    name="name"
+                    autoComplete="name"
+                    className="mt-2 h-11 w-full rounded-xl border border-white/[0.08] bg-black/20 px-3 text-[13px] text-white outline-none transition-colors focus:border-blue-400/40"
+                  />
+                </label>
+
+                <label className="text-[11px] text-zinc-400">
+                  Empresa
+                  <input
+                    minLength={2}
+                    maxLength={160}
+                    name="company"
+                    autoComplete="organization"
+                    className="mt-2 h-11 w-full rounded-xl border border-white/[0.08] bg-black/20 px-3 text-[13px] text-white outline-none transition-colors focus:border-blue-400/40"
+                  />
+                </label>
+              </div>
+
+              <label className="mt-5 block text-[11px] text-zinc-400">
+                Correo
+                <input
+                  required
+                  type="email"
+                  maxLength={254}
+                  name="email"
+                  autoComplete="email"
+                  className="mt-2 h-11 w-full rounded-xl border border-white/[0.08] bg-black/20 px-3 text-[13px] text-white outline-none transition-colors focus:border-blue-400/40"
+                />
+              </label>
+
+              <label className="mt-5 block text-[11px] text-zinc-400">
+                Motivo
+                <select
+                  required
+                  name="reason"
+                  defaultValue="Información general"
+                  className="mt-2 h-11 w-full rounded-xl border border-white/[0.08] bg-[#0B0D11] px-3 text-[13px] text-white outline-none transition-colors focus:border-blue-400/40"
+                >
+                  {reasons.map((reason) => (
+                    <option key={reason} value={reason}>
+                      {reason}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <label className="mt-5 block text-[11px] text-zinc-400">
+                Mensaje
+                <textarea
+                  required
+                  minLength={10}
+                  maxLength={3000}
+                  name="message"
+                  rows={6}
+                  className="mt-2 w-full resize-none rounded-xl border border-white/[0.08] bg-black/20 p-3 text-[13px] text-white outline-none transition-colors focus:border-blue-400/40"
+                />
+              </label>
+
+              {errorMessage && (
+                <p
+                  role="alert"
+                  className="mt-4 rounded-xl border border-red-400/15 bg-red-400/[0.05] px-3 py-2.5 text-[11px] text-red-200"
+                >
+                  {errorMessage}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="mt-6 flex h-11 w-full items-center justify-center gap-3 rounded-full bg-blue-600 text-[13px] font-medium transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {submitting ? (
+                  <>
+                    Enviando
+                    <LoaderCircle size={15} className="animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    Enviar mensaje
+                    <ArrowRight size={15} />
+                  </>
+                )}
+              </button>
+            </form>
+          )}
         </div>
       </section>
 
