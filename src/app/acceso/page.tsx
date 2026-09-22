@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, BriefcaseBusiness, Network, ShieldCheck, UserCheck, Users } from "lucide-react";
 import { SiteHeader } from "@/components/zolven/SiteHeader";
+import { SiteFooter } from "@/components/zolven/SiteFooter";
 
 const accessProducts = [
   {
@@ -100,6 +101,8 @@ export default function AccessPage() {
           </p>
         </div>
       </section>
+
+      <SiteFooter />
     </main>
   );
 }
