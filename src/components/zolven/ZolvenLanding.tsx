@@ -28,6 +28,8 @@ const products = [
       "Explora oportunidades reales, conecta con empresas y da el siguiente paso en tu carrera.",
     primary: "Explorar empleos",
     secondary: "Crear perfil",
+    primaryHref: "/productos/jobs#tour",
+    secondaryHref: "/acceso",
     note: "Más oportunidades para ti",
     gradient:
       "bg-[radial-gradient(circle_at_80%_20%,rgba(124,58,237,.48),transparent_35%),linear-gradient(145deg,#160B25_5%,#24103D_55%,#12091E_100%)]",
@@ -45,6 +47,8 @@ const products = [
       "El software de reclutamiento que te ayuda a atraer, evaluar y contratar al mejor talento, más rápido y con mayor precisión.",
     primary: "Solicitar demo",
     secondary: "Ver tour",
+    primaryHref: "/solicitar-demo",
+    secondaryHref: "/productos/hire#tour",
     note: "Talento que hace crecer tu negocio",
     gradient:
       "bg-[radial-gradient(circle_at_80%_20%,rgba(5,150,105,.36),transparent_37%),linear-gradient(145deg,#061C18_0%,#07372B_55%,#061B17_100%)]",
@@ -62,6 +66,8 @@ const products = [
       "Una plataforma completa para administrar personas, tiempo, nómina, ausencias, cumplimiento y más, todo en un mismo lugar.",
     primary: "Solicitar demo",
     secondary: "Ver tour",
+    primaryHref: "/solicitar-demo",
+    secondaryHref: "/productos/opex#tour",
     note: "Operaciones más fuertes",
     gradient:
       "bg-[radial-gradient(circle_at_83%_22%,rgba(37,99,235,.50),transparent_37%),linear-gradient(145deg,#06152C_0%,#082B61_55%,#07162D_100%)]",
@@ -146,6 +152,8 @@ function ProductCard({
   description,
   primary,
   secondary,
+  primaryHref,
+  secondaryHref,
   note,
   gradient,
   border,
@@ -159,6 +167,8 @@ function ProductCard({
   description: string;
   primary: string;
   secondary: string;
+  primaryHref: string;
+  secondaryHref: string;
   note: string;
   gradient: string;
   border: string;
@@ -179,8 +189,8 @@ function ProductCard({
         <p className="mt-3 max-w-[320px] text-[13px] leading-[1.4] text-white/75">{description}</p>
 
         <div className="mt-4 flex flex-wrap gap-3">
-          <Link href={href} className={`flex h-9 items-center gap-5 rounded-full px-5 text-[11px] font-medium ${accent}`}>{primary}<ArrowRight size={13} /></Link>
-          <Link href={`${href}#tour`} className="flex h-9 items-center rounded-full border border-white/45 px-5 text-[11px]">{secondary}</Link>
+          <Link href={primaryHref} className={`flex h-9 items-center gap-5 rounded-full px-5 text-[11px] font-medium ${accent}`}>{primary}<ArrowRight size={13} /></Link>
+          <Link href={secondaryHref} className="flex h-9 items-center rounded-full border border-white/45 px-5 text-[11px]">{secondary}</Link>
         </div>
       </div>
 
