@@ -7,6 +7,7 @@ import {
   ArrowRight,
   CheckCircle2,
   LoaderCircle,
+  Mail,
   MessagesSquare,
 } from "lucide-react";
 import { SiteHeader } from "@/components/zolven/SiteHeader";
@@ -88,8 +89,16 @@ export default function ContactPage() {
           </h1>
 
           <p className="mt-5 max-w-[500px] text-[15px] leading-[1.6] text-zinc-400 sm:text-[16px]">
-            Para consultas generales, alianzas o temas comerciales. Si lo que buscas es una demostración del producto, usa el flujo de Solicitar demo.
+            Para consultas generales, soporte, alianzas o temas comerciales. Si lo que buscas es una demostración del producto, usa el flujo de Solicitar demo.
           </p>
+
+          <a
+            href="mailto:soporte@zolven.com"
+            className="mt-7 inline-flex items-center gap-3 rounded-full border border-white/[0.08] bg-white/[0.025] px-4 py-2.5 text-[12px] text-white transition-colors hover:bg-white/[0.05]"
+          >
+            <Mail size={14} className="text-blue-300" />
+            soporte@zolven.com
+          </a>
 
           <div className="mt-10 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5">
             <div className="flex items-start gap-3">
