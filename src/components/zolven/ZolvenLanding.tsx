@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { SiteHeader } from "@/components/zolven/SiteHeader";
+import { SiteFooter } from "@/components/zolven/SiteFooter";
 import {
   ArrowRight,
   BarChart3,
@@ -90,7 +91,7 @@ export function ZolvenLanding() {
         ))}
       </section>
       <EcosystemBar />
-      <Footer />
+      <SiteFooter />
     </main>
   );
 }
@@ -558,14 +559,3 @@ function EcosystemBar() {
   );
 }
 
-function Footer() {
-  return (
-    <footer className="border-t border-white/[0.06] bg-[#07090B]">
-      <div className="mx-auto grid h-11 max-w-[1536px] grid-cols-[1fr_auto] items-center px-5 sm:grid-cols-3 sm:px-10">
-        <span className="text-[14px] font-bold tracking-[-0.04em]">ZOLVEN</span>
-        <span className="hidden text-center text-[7px] uppercase tracking-[0.48em] text-zinc-500 sm:block">Simplify · Connect · Empower</span>
-        <span className="text-right text-[7px] uppercase tracking-[0.34em] text-zinc-500">Zolven.com</span>
-      </div>
-    </footer>
-  );
-}
