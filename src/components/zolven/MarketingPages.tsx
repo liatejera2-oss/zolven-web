@@ -37,9 +37,9 @@ function Shell({
 
       <section className="relative overflow-hidden border-b border-white/[0.06]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_15%,rgba(53,92,255,.12),transparent_35%)]" />
-        <div className="relative mx-auto max-w-[1536px] px-7 py-20 lg:px-14 lg:py-24">
+        <div className="relative mx-auto max-w-[1536px] px-5 py-14 sm:px-7 sm:py-20 lg:px-14 lg:py-24">
           <p className="text-[10px] uppercase tracking-[0.30em] text-blue-300">{eyebrow}</p>
-          <h1 className="mt-4 max-w-[850px] text-[48px] font-semibold leading-[.98] tracking-[-0.055em] lg:text-[64px]">
+          <h1 className="mt-4 max-w-[850px] text-[40px] font-semibold leading-[.98] tracking-[-0.055em] sm:text-[48px] lg:text-[64px]">
             {title}
           </h1>
           <p className="mt-5 max-w-[700px] text-[17px] leading-[1.6] text-zinc-400">{description}</p>
@@ -49,6 +49,32 @@ function Shell({
       {children}
       <SiteFooter />
     </main>
+  );
+}
+
+function NextStep({
+  title = "¿Quieres verlo aplicado a tu operación?",
+  description = "Cuéntanos qué necesitas resolver y revisamos qué parte del ecosistema ZOLVEN encaja mejor.",
+}: {
+  title?: string;
+  description?: string;
+}) {
+  return (
+    <section className="border-t border-white/[0.06]">
+      <div className="mx-auto flex max-w-[1180px] flex-col gap-6 px-5 py-12 sm:px-7 md:flex-row md:items-center md:justify-between lg:px-14">
+        <div>
+          <p className="text-[9px] uppercase tracking-[0.24em] text-blue-300">PRÓXIMO PASO</p>
+          <h2 className="mt-2 text-[26px] font-medium tracking-[-0.04em]">{title}</h2>
+          <p className="mt-2 max-w-[620px] text-[12px] leading-[1.6] text-zinc-500">{description}</p>
+        </div>
+        <Link
+          href="/solicitar-demo"
+          className="inline-flex h-11 shrink-0 items-center justify-center gap-3 rounded-full bg-white px-6 text-[12px] font-medium text-black"
+        >
+          Solicitar demo <ArrowRight size={14} />
+        </Link>
+      </div>
+    </section>
   );
 }
 
@@ -98,7 +124,7 @@ export function SolutionsPage() {
       title="Tecnología organizada alrededor de cómo opera tu empresa."
       description="Empieza por el problema que necesitas resolver y llega al producto adecuado sin recorrer un catálogo interminable."
     >
-      <section className="mx-auto max-w-[1536px] px-7 py-16 lg:px-14">
+      <section className="mx-auto max-w-[1536px] px-5 py-14 sm:px-7 sm:py-16 lg:px-14">
         <div className="grid gap-3 md:grid-cols-2">
           {solutionCards.map(({ icon: Icon, title, description, product, href, accent, soft }) => (
             <Link
@@ -119,6 +145,7 @@ export function SolutionsPage() {
           ))}
         </div>
       </section>
+      <NextStep />
     </Shell>
   );
 }
@@ -158,7 +185,7 @@ export function IndustriesPage() {
       title="Una base flexible para operaciones que no se parecen entre sí."
       description="ZOLVEN se adapta a estructuras, turnos, equipos y niveles de control diferentes sin perder una experiencia común."
     >
-      <section className="mx-auto max-w-[1536px] px-7 py-16 lg:px-14">
+      <section className="mx-auto max-w-[1536px] px-5 py-14 sm:px-7 sm:py-16 lg:px-14">
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-5">
           {industries.map(({ icon: Icon, name, detail }, index) => (
             <div key={name} className="relative min-h-[300px] overflow-hidden rounded-[24px] border border-white/[0.07] bg-white/[0.018] p-5">
@@ -186,6 +213,10 @@ export function IndustriesPage() {
           </Link>
         </div>
       </section>
+      <NextStep
+        title="Lleva ZOLVEN a tu contexto operativo."
+        description="Revisamos industria, estructura y necesidades para mostrarte una implementación relevante."
+      />
     </Shell>
   );
 }
@@ -224,7 +255,7 @@ export function PricingPage() {
       title="Planes claros para empezar por la operación."
       description="Los precios mostrados corresponden a ZOLVEN Opex. Hire, Jobs y ZOLVEN One se incorporan según el alcance de cada implementación."
     >
-      <section className="mx-auto max-w-[1180px] px-7 py-16 lg:px-14">
+      <section className="mx-auto max-w-[1180px] px-5 py-14 sm:px-7 sm:py-16 lg:px-14">
         <div className="grid gap-3 lg:grid-cols-3">
           {plans.map((plan) => (
             <div
@@ -271,6 +302,10 @@ export function PricingPage() {
           Precios base. El alcance final puede variar según configuración, volumen e integraciones requeridas.
         </p>
       </section>
+      <NextStep
+        title="Compara el plan con tu operación."
+        description="Los precios base sirven como punto de partida. La demo permite validar módulos, volumen y alcance."
+      />
     </Shell>
   );
 }
@@ -300,7 +335,7 @@ export function ResourcesPage() {
       title="Información útil, sin convertir el sitio en una biblioteca."
       description="Este espacio se mantendrá deliberadamente ligero: guías, insights y ayuda cuando aporten valor real al usuario."
     >
-      <section className="mx-auto max-w-[1180px] px-7 py-16 lg:px-14">
+      <section className="mx-auto max-w-[1180px] px-5 py-14 sm:px-7 sm:py-16 lg:px-14">
         <div className="grid gap-3 md:grid-cols-3">
           {resources.map(({ icon: Icon, title, text }) => (
             <div key={title} className="rounded-[24px] border border-white/[0.07] bg-white/[0.018] p-6">
