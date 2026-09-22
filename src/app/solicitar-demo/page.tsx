@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, CheckCircle2, LoaderCircle } from "lucide-react";
 import { SiteHeader } from "@/components/zolven/SiteHeader";
+import { SiteFooter } from "@/components/zolven/SiteFooter";
 import { supabase } from "@/lib/supabase/client";
 
 export default function SolicitarDemoPage() {
@@ -232,6 +233,8 @@ export default function SolicitarDemoPage() {
           )}
         </div>
       </section>
+
+      <SiteFooter />
     </main>
   );
 }
