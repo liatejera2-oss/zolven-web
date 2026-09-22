@@ -21,6 +21,7 @@ import {
   WalletCards,
 } from "lucide-react";
 import { SiteHeader } from "@/components/zolven/SiteHeader";
+import { SiteFooter } from "@/components/zolven/SiteFooter";
 
 type ProductKey = "opex" | "hire" | "jobs" | "one";
 
@@ -421,6 +422,8 @@ export function ProductExperience({ product }: { product: ProductKey }) {
           })}
         </div>
       </section>
+
+      <SiteFooter />
     </main>
   );
 }
