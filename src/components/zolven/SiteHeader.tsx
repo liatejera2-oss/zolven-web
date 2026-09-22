@@ -39,6 +39,7 @@ const searchItems = [
   { label: "Soluciones", detail: "Explora por necesidad de negocio", href: "/soluciones" },
   { label: "Industrias", detail: "Casos por industria", href: "/industrias" },
   { label: "Precios", detail: "Planes de ZOLVEN Opex", href: "/precios" },
+  { label: "Contacto", detail: "Consultas generales y comerciales", href: "/contacto" },
   { label: "Solicitar demo", detail: "Habla con ZOLVEN", href: "/solicitar-demo" },
 ];
 
@@ -125,6 +126,9 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
             </Link>
             <Link href="/precios" className="transition-opacity hover:opacity-60">
               Precios
+            </Link>
+            <Link href="/contacto" className="transition-opacity hover:opacity-60">
+              Contacto
             </Link>
           </nav>
 
@@ -234,6 +238,7 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
               ["Soluciones", "/soluciones"],
               ["Industrias", "/industrias"],
               ["Precios", "/precios"],
+              ["Contacto", "/contacto"],
               ["Iniciar sesión", "/acceso"],
             ].map(([label, href]) => (
               <Link
