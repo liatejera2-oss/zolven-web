@@ -145,6 +145,43 @@ export function SolutionsPage() {
           ))}
         </div>
       </section>
+
+      <section className="border-t border-white/[0.06] bg-white/[0.012]">
+        <div className="mx-auto max-w-[1536px] px-5 py-14 sm:px-7 sm:py-16 lg:px-14">
+          <div className="max-w-[720px]">
+            <p className="text-[10px] uppercase tracking-[0.28em] text-blue-300">UN SOLO RECORRIDO</p>
+            <h2 className="mt-3 text-[32px] font-medium leading-[1.02] tracking-[-0.045em] sm:text-[40px]">
+              Del talento a la operación, sin perder el contexto.
+            </h2>
+            <p className="mt-4 text-[14px] leading-[1.65] text-zinc-500">
+              Cada producto resuelve una etapa diferente, pero la arquitectura está pensada para que la información pueda continuar con la persona y con la empresa.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            {[
+              ["01", "ZOLVEN Jobs", "Descubrir oportunidades y construir un perfil.", "/productos/jobs", "text-violet-300"],
+              ["02", "ZOLVEN Hire", "Convertir candidatos en decisiones de contratación.", "/productos/hire", "text-emerald-300"],
+              ["03", "ZOLVEN Opex", "Operar al equipo contratado con claridad.", "/productos/opex", "text-blue-300"],
+              ["04", "ZOLVEN One", "Conectar identidad, datos e integraciones.", "/productos/one", "text-cyan-300"],
+            ].map(([number, name, text, href, accent]) => (
+              <Link
+                key={name}
+                href={href}
+                className="group rounded-[22px] border border-white/[0.065] bg-[#0B0D11] p-5 transition-colors hover:bg-white/[0.03]"
+              >
+                <div className="flex items-center justify-between">
+                  <span className={`text-[8px] uppercase tracking-[0.22em] ${accent}`}>{number}</span>
+                  <ArrowRight size={13} className="text-zinc-700 transition-transform group-hover:translate-x-1" />
+                </div>
+                <h3 className="mt-8 text-[18px] font-medium tracking-[-0.03em]">{name}</h3>
+                <p className="mt-3 text-[11px] leading-[1.55] text-zinc-500">{text}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <NextStep />
     </Shell>
   );
@@ -154,27 +191,62 @@ const industries = [
   {
     icon: Building2,
     name: "Banca y servicios financieros",
-    detail: "Control, trazabilidad y cumplimiento para operaciones con alta exigencia documental.",
+    challenge:
+      "Operaciones con alta exigencia de control, documentación y trazabilidad entre equipos.",
+    needs: [
+      "Expedientes y movimientos con historial",
+      "Permisos, controles y seguimiento de vencimientos",
+      "Indicadores operativos consolidados",
+    ],
+    products: ["Opex", "One"],
   },
   {
     icon: HardHat,
     name: "Construcción",
-    detail: "Personas, tiempo y operación distribuida entre proyectos, turnos y ubicaciones.",
+    challenge:
+      "Personal distribuido entre proyectos, jornadas variables y múltiples ubicaciones.",
+    needs: [
+      "Asistencia e incidencias por proyecto o ubicación",
+      "Ausencias y disponibilidad de cuadrillas",
+      "Documentación y cumplimiento operativo",
+    ],
+    products: ["Opex", "Hire"],
   },
   {
     icon: HeartPulse,
     name: "Salud",
-    detail: "Cobertura, asistencia y coordinación operativa para equipos con continuidad crítica.",
+    challenge:
+      "Continuidad crítica, cobertura por turnos y alta sensibilidad a ausencias e incidencias.",
+    needs: [
+      "Visibilidad de asistencia y cobertura",
+      "Gestión de ausencias y disponibilidad",
+      "Alertas y seguimiento de requisitos",
+    ],
+    products: ["Opex", "Hire"],
   },
   {
     icon: Store,
     name: "Retail",
-    detail: "Visibilidad de personal, horarios y disponibilidad entre tiendas y equipos.",
+    challenge:
+      "Equipos distribuidos entre tiendas, horarios rotativos y necesidad de respuesta rápida.",
+    needs: [
+      "Asistencia y jornadas por ubicación",
+      "Disponibilidad del personal",
+      "Reclutamiento para posiciones de alta rotación",
+    ],
+    products: ["Opex", "Hire", "Jobs"],
   },
   {
     icon: Truck,
     name: "Logística",
-    detail: "Seguimiento de jornadas, incidencias y operación de equipos móviles o distribuidos.",
+    challenge:
+      "Operación móvil, múltiples puntos de trabajo y alta dependencia de puntualidad y cobertura.",
+    needs: [
+      "Seguimiento de jornadas e incidencias",
+      "Documentación y cumplimiento por colaborador",
+      "Métricas para anticipar desviaciones operativas",
+    ],
+    products: ["Opex", "One"],
   },
 ];
 
@@ -186,17 +258,58 @@ export function IndustriesPage() {
       description="ZOLVEN se adapta a estructuras, turnos, equipos y niveles de control diferentes sin perder una experiencia común."
     >
       <section className="mx-auto max-w-[1536px] px-5 py-14 sm:px-7 sm:py-16 lg:px-14">
-        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-5">
-          {industries.map(({ icon: Icon, name, detail }, index) => (
-            <div key={name} className="relative min-h-[300px] overflow-hidden rounded-[24px] border border-white/[0.07] bg-white/[0.018] p-5">
-              <div className="absolute inset-x-0 bottom-0 h-36 bg-[radial-gradient(circle_at_50%_100%,rgba(53,92,255,.13),transparent_65%)]" />
+        <div className="max-w-[720px]">
+          <p className="text-[10px] uppercase tracking-[0.28em] text-blue-300">DESDE EL PROBLEMA OPERATIVO</p>
+          <h2 className="mt-3 text-[32px] font-medium leading-[1.02] tracking-[-0.045em] sm:text-[40px]">
+            Cada industria cambia el contexto. La lógica operativa sigue conectada.
+          </h2>
+          <p className="mt-4 text-[14px] leading-[1.65] text-zinc-500">
+            No presentamos la misma solución con otro nombre. Partimos de los puntos de fricción más habituales de cada operación y mostramos qué capacidades de ZOLVEN pueden intervenir.
+          </p>
+        </div>
+
+        <div className="mt-10 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          {industries.map(({ icon: Icon, name, challenge, needs, products }, index) => (
+            <div
+              key={name}
+              className="relative overflow-hidden rounded-[24px] border border-white/[0.07] bg-white/[0.018] p-6"
+            >
+              <div className="absolute inset-x-0 bottom-0 h-40 bg-[radial-gradient(circle_at_50%_100%,rgba(53,92,255,.10),transparent_68%)]" />
               <div className="relative">
-                <div className="grid size-10 place-items-center rounded-xl bg-blue-500/10">
-                  <Icon size={18} className="text-blue-300" />
+                <div className="flex items-start justify-between gap-5">
+                  <div className="grid size-10 place-items-center rounded-xl bg-blue-500/10">
+                    <Icon size={18} className="text-blue-300" />
+                  </div>
+                  <span className="text-[8px] uppercase tracking-[0.22em] text-zinc-700">
+                    0{index + 1}
+                  </span>
                 </div>
-                <p className="mt-10 text-[9px] uppercase tracking-[0.24em] text-zinc-600">0{index + 1}</p>
-                <h2 className="mt-3 text-[20px] font-medium leading-[1.05] tracking-[-0.03em]">{name}</h2>
-                <p className="mt-4 text-[12px] leading-[1.55] text-zinc-500">{detail}</p>
+
+                <h2 className="mt-7 text-[22px] font-medium leading-[1.05] tracking-[-0.03em]">{name}</h2>
+                <p className="mt-3 text-[12px] leading-[1.6] text-zinc-500">{challenge}</p>
+
+                <div className="mt-6 border-t border-white/[0.06] pt-5">
+                  <p className="text-[8px] uppercase tracking-[0.2em] text-zinc-600">QUÉ NECESITA CONTROLAR</p>
+                  <div className="mt-3 space-y-2.5">
+                    {needs.map((need) => (
+                      <div key={need} className="flex items-start gap-2 text-[11px] leading-[1.5] text-zinc-400">
+                        <Check size={12} className="mt-0.5 shrink-0 text-blue-300" />
+                        <span>{need}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {products.map((product) => (
+                    <span
+                      key={product}
+                      className="rounded-full border border-white/[0.07] bg-white/[0.025] px-2.5 py-1 text-[8px] text-zinc-400"
+                    >
+                      ZOLVEN {product}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           ))}
