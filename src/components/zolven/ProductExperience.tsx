@@ -33,6 +33,12 @@ type Tab = {
   metrics: Array<[string, string]>;
 };
 
+type ProductDepth = {
+  title: string;
+  description: string;
+  items: string[];
+};
+
 type ProductConfig = {
   brand: string;
   descriptor: string;
@@ -46,6 +52,10 @@ type ProductConfig = {
   primaryHref: string;
   secondaryLabel: string;
   secondaryHref: string;
+  workflow: string[];
+  depthTitle: string;
+  depthIntro: string;
+  depth: ProductDepth[];
   tabs: Tab[];
 };
 
@@ -64,6 +74,48 @@ const configs: Record<ProductKey, ProductConfig> = {
     primaryHref: "/solicitar-demo",
     secondaryLabel: "Ver producto",
     secondaryHref: "#tour",
+    workflow: ["People", "Time & Leave", "Payroll", "Compliance", "Analytics"],
+    depthTitle: "La operación diaria, conectada de principio a fin.",
+    depthIntro:
+      "Opex no es un conjunto de pantallas aisladas. Cada capacidad comparte contexto para reducir reprocesos y mejorar la lectura operativa.",
+    depth: [
+      {
+        title: "People & estructura",
+        description: "La base de información para operar con contexto y trazabilidad.",
+        items: [
+          "Expedientes y datos laborales centralizados",
+          "Estructura organizacional y movimientos",
+          "Documentos y cambios con historial",
+        ],
+      },
+      {
+        title: "Time, Leave & Payroll",
+        description: "Los eventos que afectan la jornada llegan al siguiente proceso sin volver a capturarse.",
+        items: [
+          "Asistencia, jornadas e incidencias",
+          "Saldos, solicitudes y aprobaciones de ausencias",
+          "Preparación de nómina con contexto operativo",
+        ],
+      },
+      {
+        title: "Compliance",
+        description: "Controles visibles antes de convertirse en problemas operativos.",
+        items: [
+          "Documentos y vencimientos",
+          "Alertas y seguimiento de pendientes",
+          "Trazabilidad para revisión y auditoría",
+        ],
+      },
+      {
+        title: "Analytics & performance",
+        description: "Una lectura ejecutiva común para detectar desviaciones y tomar decisiones.",
+        items: [
+          "Indicadores de personas y asistencia",
+          "Tendencias de ausencias y operación",
+          "Métricas de productividad y desempeño",
+        ],
+      },
+    ],
     tabs: [
       {
         label: "People",
@@ -129,6 +181,48 @@ const configs: Record<ProductKey, ProductConfig> = {
     primaryHref: "/solicitar-demo",
     secondaryLabel: "Ver producto",
     secondaryHref: "#tour",
+    workflow: ["Requisición", "Publicación", "Screening", "Entrevistas", "Oferta", "Contratación", "Opex"],
+    depthTitle: "Del requerimiento de talento a una contratación lista para operar.",
+    depthIntro:
+      "Hire organiza el proceso completo para que responsables, evaluadores y candidatos avancen con el mismo contexto.",
+    depth: [
+      {
+        title: "Requisiciones y vacantes",
+        description: "Empieza con una necesidad aprobada y una búsqueda claramente definida.",
+        items: [
+          "Solicitud y aprobación de posiciones",
+          "Responsables, prioridad y requisitos",
+          "Publicación y seguimiento del estado",
+        ],
+      },
+      {
+        title: "Screening & pipeline",
+        description: "Cada candidato avanza por etapas visibles y comparables.",
+        items: [
+          "Pipeline configurable por vacante",
+          "Notas, evaluaciones y criterios de match",
+          "Historial de decisiones por candidato",
+        ],
+      },
+      {
+        title: "Entrevistas & scorecards",
+        description: "El equipo evalúa sobre una estructura común, no sobre mensajes dispersos.",
+        items: [
+          "Coordinación de entrevistas",
+          "Feedback estructurado y scorecards",
+          "Visibilidad de pendientes y próximos pasos",
+        ],
+      },
+      {
+        title: "Oferta y transición",
+        description: "La contratación cierra Hire y prepara la continuidad hacia Opex.",
+        items: [
+          "Estado de oferta y decisión final",
+          "Registro de contratación",
+          "Transferencia de contexto del candidato al empleado",
+        ],
+      },
+    ],
     tabs: [
       {
         label: "Vacantes",
@@ -178,6 +272,39 @@ const configs: Record<ProductKey, ProductConfig> = {
     primaryHref: "#tour",
     secondaryLabel: "Crear perfil",
     secondaryHref: "/acceso",
+    workflow: ["Descubrir", "Guardar", "Aplicar", "Dar seguimiento", "Actualizar perfil"],
+    depthTitle: "Una experiencia de búsqueda que mantiene el contexto del candidato.",
+    depthIntro:
+      "Jobs está diseñado para ayudar a descubrir oportunidades, actuar sobre ellas y conservar seguimiento sin convertir la experiencia en un directorio de vacantes.",
+    depth: [
+      {
+        title: "Descubrimiento relevante",
+        description: "La búsqueda parte del rol, modalidad, área y preferencias profesionales.",
+        items: [
+          "Búsqueda y filtros por contexto",
+          "Oportunidades guardadas",
+          "Recomendaciones basadas en preferencias",
+        ],
+      },
+      {
+        title: "Aplicaciones organizadas",
+        description: "Cada proceso conserva su estado y próximos pasos.",
+        items: [
+          "Aplicaciones activas en un solo lugar",
+          "Seguimiento de entrevistas y avances",
+          "Historial de oportunidades consideradas",
+        ],
+      },
+      {
+        title: "Perfil profesional",
+        description: "La información del candidato se mantiene lista para futuras oportunidades.",
+        items: [
+          "Experiencia y habilidades",
+          "Preferencias de trabajo",
+          "Perfil reutilizable dentro del ecosistema",
+        ],
+      },
+    ],
     tabs: [
       {
         label: "Explorar",
@@ -227,6 +354,48 @@ const configs: Record<ProductKey, ProductConfig> = {
     primaryHref: "/solicitar-demo",
     secondaryLabel: "Ver ecosistema",
     secondaryHref: "#tour",
+    workflow: ["Identidad", "Roles", "Datos compartidos", "Integraciones", "Automatización"],
+    depthTitle: "La infraestructura común detrás de cada producto ZOLVEN.",
+    depthIntro:
+      "One evita que cada solución funcione como una isla. Define cómo se conectan usuarios, organizaciones, datos y servicios dentro del ecosistema.",
+    depth: [
+      {
+        title: "Identidad & acceso",
+        description: "Una sola base para entrar al ecosistema y controlar quién puede hacer qué.",
+        items: [
+          "Cuenta e identidad compartidas",
+          "Roles y permisos por organización",
+          "Base preparada para acceso empresarial",
+        ],
+      },
+      {
+        title: "Datos & gobierno",
+        description: "El contexto relevante puede viajar entre productos sin duplicar procesos.",
+        items: [
+          "Modelo común de organización y usuario",
+          "Trazabilidad de cambios críticos",
+          "Reglas para compartir información entre productos",
+        ],
+      },
+      {
+        title: "Integraciones",
+        description: "Una capa preparada para conectar servicios externos y nuevas líneas de producto.",
+        items: [
+          "Arquitectura orientada a APIs",
+          "Conectores e integraciones empresariales",
+          "Expansión hacia Finance, CRM, Projects y más",
+        ],
+      },
+      {
+        title: "Workflows & automation",
+        description: "La automatización se plantea como capacidad transversal, no como otro silo.",
+        items: [
+          "Triggers y condiciones",
+          "Acciones entre productos",
+          "Flujos multietapa con trazabilidad",
+        ],
+      },
+    ],
     tabs: [
       {
         label: "Ecosistema",
@@ -413,7 +582,7 @@ export function ProductExperience({ product }: { product: ProductKey }) {
           <p className={`text-[10px] uppercase tracking-[0.28em] ${config.accentText}`}>PRODUCTO</p>
           <h2 className="mt-3 text-[32px] font-medium tracking-[-0.045em] sm:text-[38px]">Explora la plataforma por capacidad.</h2>
           <p className="mt-3 text-[15px] leading-[1.6] text-zinc-500">
-            Selecciona una pestaña para cambiar el contenido del producto. Esta navegación ya es interactiva y servirá como base para las funcionalidades reales.
+            Cada capacidad resuelve una parte concreta del flujo. Selecciona un módulo para entender qué información organiza y cómo se conecta con el resto del producto.
           </p>
         </div>
 
@@ -440,6 +609,96 @@ export function ProductExperience({ product }: { product: ProductKey }) {
               </button>
             );
           })}
+        </div>
+      </section>
+
+
+      <section className="border-t border-white/[0.06] bg-white/[0.012]">
+        <div className="mx-auto max-w-[1536px] px-5 py-14 sm:px-7 sm:py-20 lg:px-14">
+          <div className="grid gap-8 lg:grid-cols-[.75fr_1.25fr] lg:gap-14">
+            <div>
+              <p className={`text-[10px] uppercase tracking-[0.28em] ${config.accentText}`}>CÓMO FUNCIONA</p>
+              <h2 className="mt-3 max-w-[520px] text-[32px] font-medium leading-[1.02] tracking-[-0.045em] sm:text-[40px]">
+                Un flujo continuo, no módulos desconectados.
+              </h2>
+              <p className="mt-4 max-w-[520px] text-[14px] leading-[1.65] text-zinc-500">
+                El valor aparece cuando la información avanza con el proceso. ZOLVEN conserva contexto entre etapas para reducir trabajo manual y puntos ciegos.
+              </p>
+            </div>
+
+            <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+              {config.workflow.map((step, index) => (
+                <div
+                  key={step}
+                  className="relative rounded-2xl border border-white/[0.06] bg-[#0B0D11] p-4"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className={`text-[8px] uppercase tracking-[0.2em] ${config.accentText}`}>
+                      0{index + 1}
+                    </span>
+                    {index < config.workflow.length - 1 && (
+                      <ArrowRight size={12} className="text-zinc-700" />
+                    )}
+                  </div>
+                  <p className="mt-5 text-[13px] font-medium text-zinc-200">{step}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/[0.06]">
+        <div className="mx-auto max-w-[1536px] px-5 py-14 sm:px-7 sm:py-20 lg:px-14">
+          <div className="max-w-[720px]">
+            <p className={`text-[10px] uppercase tracking-[0.28em] ${config.accentText}`}>CAPACIDADES</p>
+            <h2 className="mt-3 text-[32px] font-medium leading-[1.02] tracking-[-0.045em] sm:text-[40px]">
+              {config.depthTitle}
+            </h2>
+            <p className="mt-4 text-[14px] leading-[1.65] text-zinc-500">{config.depthIntro}</p>
+          </div>
+
+          <div className="mt-10 grid gap-3 md:grid-cols-2">
+            {config.depth.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-[24px] border border-white/[0.065] bg-white/[0.018] p-6"
+              >
+                <h3 className="text-[20px] font-medium tracking-[-0.03em]">{item.title}</h3>
+                <p className="mt-3 max-w-[560px] text-[12px] leading-[1.6] text-zinc-500">
+                  {item.description}
+                </p>
+                <div className="mt-6 space-y-3 border-t border-white/[0.06] pt-5">
+                  {item.items.map((point) => (
+                    <div key={point} className="flex items-start gap-2.5 text-[11px] leading-[1.5] text-zinc-400">
+                      <CheckCircle2 size={13} className={`mt-0.5 shrink-0 ${config.accentText}`} />
+                      <span>{point}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/[0.06] bg-white/[0.012]">
+        <div className="mx-auto flex max-w-[1180px] flex-col gap-6 px-5 py-12 sm:px-7 md:flex-row md:items-center md:justify-between lg:px-14">
+          <div>
+            <p className={`text-[9px] uppercase tracking-[0.24em] ${config.accentText}`}>PRÓXIMO PASO</p>
+            <h2 className="mt-2 text-[26px] font-medium tracking-[-0.04em]">
+              Lleva {config.brand} a un caso real.
+            </h2>
+            <p className="mt-2 max-w-[620px] text-[12px] leading-[1.6] text-zinc-500">
+              Revisa el producto en el contexto de tu operación y define qué capacidades tienen sentido para tu implementación.
+            </p>
+          </div>
+          <Link
+            href={config.primaryHref}
+            className={`inline-flex h-11 shrink-0 items-center justify-center gap-3 rounded-full px-6 text-[12px] font-medium ${config.accent}`}
+          >
+            {config.primaryLabel} <ArrowRight size={14} />
+          </Link>
         </div>
       </section>
 
