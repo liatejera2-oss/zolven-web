@@ -63,3 +63,18 @@ When a visual reference/mockup is present in `/reference`, it is the visual sour
 ## Current phase
 
 The website is in visual implementation phase. Do not build the full product applications yet. Supabase will initially be used only for website backend needs such as demo requests; authentication and product databases come in later phases.
+
+## Content depth principles
+
+Use mature enterprise SaaS websites such as Humand only as references for **information architecture and content depth**. Do not copy their branding, visual language, product naming, claims or page structure literally.
+
+For ZOLVEN:
+
+- Keep **ZOLVEN = Business Technology**, not an HR-only platform.
+- Preserve the product architecture: **ZOLVEN Jobs → ZOLVEN Hire → ZOLVEN Opex**, with **ZOLVEN One** as the shared ecosystem layer.
+- Product pages should explain: operational problem → capability → workflow → practical value.
+- Industry pages should start from concrete operational friction, then show which ZOLVEN capabilities apply.
+- Keep the homepage concise; detailed explanations belong on product, solution and industry pages.
+- Never fabricate customers, testimonials, usage numbers, uptime, ROI or other proof points.
+- Automation is a transversal capability across products and ZOLVEN One, not a separate product unless explicitly approved.
+- ZOLVEN One should be explained through identity, permissions, shared data, integrations, governance and future automation.
